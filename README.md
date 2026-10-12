@@ -12,6 +12,9 @@ Adaptive dumbbell / kettlebell circuit trainer. Static site, no build step. Data
 - **iPhone / Safari:** Share → **Add to Home Screen**. Uses `apple-touch-icon.png`.
 - **Desktop Chrome/Edge:** install icon in the address bar → opens in its own window with the Meathead icon.
 
+## Moving data between devices
+Settings > Backup: Export saves a .json backup (share sheet on phones, download on desktop). Import it on the other device and choose Merge (keeps every workout from both with no duplicates, the most recent weights, and adds new locations) or Replace. Export before deploying a new version if you want a safety copy.
+
 ## Updating
 When you change any asset, bump `VERSION` in `sw.js` so installed copies pick up the new files.
 

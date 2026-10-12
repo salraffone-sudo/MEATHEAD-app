@@ -112,6 +112,19 @@ body.noscroll{overflow:hidden}
 .prow{display:flex;align-items:center;gap:10px;padding:6px;border-radius:10px;border-bottom:1px solid var(--bd)}.prow svg{flex:0 0 56px;background:var(--fig);border-radius:8px}
 .prow.now{background:#0b1e33;outline:1px solid #073763}
 .dots{display:flex;gap:5px;flex:0 0 auto}.dot{display:inline-block;width:11px;height:11px;border-radius:50%;border:1.5px solid #5b6168;vertical-align:-1px}.dot.d{background:#CFE2F3;border-color:#CFE2F3}.dot.c{background:#990000;border-color:#ff6b6b}.dot.s{border-style:dashed}
+
+/* ---- v3 ---- */
+.hold{display:flex;flex-direction:column;gap:6px;margin:8px 0;padding:10px 12px;border-radius:12px;background:#0b1e33;border:1px solid #073763;font-size:14px;line-height:1.4}
+.hold div{display:flex;gap:10px}.hold b{flex:0 0 46px;color:var(--acc);font-size:12px;letter-spacing:.06em;text-transform:uppercase;padding-top:1px}.hold span{color:#dfe8f1}
+.mini{font-size:12.5px;color:#b8c7d6;margin:2px 0 4px;line-height:1.4}
+.card.note{background:#352c12;border-color:#c9a23a;color:#e3c46a;font-size:14px}
+.numf{display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center}.numf small{font-size:12px}
+.numf .stepper{gap:5px}.numf .stepper button{width:40px}.numf .stepper input{width:62px;min-height:44px;padding:8px;font-size:18px;border:1px solid var(--bd);border-radius:10px;text-align:center}
+.locrow{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:10px}.locrow .chips{gap:6px}.locrow .chip{min-height:36px;padding:6px 12px}
+.lcard{display:flex;align-items:center;gap:10px}
+.fld{display:flex;flex-direction:column;gap:6px;margin:10px 0;flex:1;min-width:0}.fld>span{font-size:14px;color:var(--mut)}
+.fld input{width:100%;padding:12px;font-size:16px;border:1px solid var(--bd);border-radius:10px;background:#15181b;color:var(--ink)}
+label.btn{display:flex;align-items:center;justify-content:center;text-align:center}
 </style></head><body>
 <div id="splash" role="img" aria-label="Meathead"><div class="sp-in"><svg class="splogo" aria-hidden="true" focusable="false" viewBox="6 13 88 68"><defs><filter id="sglow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="1.4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
  <g fill="#CFE2F3" fill-opacity=".26"><path d="M9.04 65.21C9.42 61.9 12.01 58.08 17.13 56.06C22.25 54.05 32.47 51.77 39.75 53.1C47.03 54.43 56.49 60.96 60.79 64.04C65.09 67.13 65.83 69.31 65.56 71.63C65.3 73.95 63.98 76.9 59.21 77.96C54.44 79.01 44.32 78.28 36.93 77.94C29.54 77.6 19.52 78.06 14.87 75.94C10.22 73.81 8.67 68.52 9.04 65.21Z"/><path d="M59.17 76.25C56.67 75.86 53.44 72.81 52.49 69.81C51.55 66.82 52.06 64.55 53.48 58.29C54.91 52.02 58.87 37.09 61.06 32.22C63.25 27.35 64.98 28.79 66.62 29.05C68.27 29.31 70.52 28.5 70.94 33.78C71.36 39.06 69.7 54.36 69.13 60.76C68.56 67.16 69.17 69.6 67.51 72.19C65.85 74.77 61.67 76.65 59.17 76.25Z"/><ellipse cx="18.98" cy="66.34" rx="8.6" ry="10" transform="rotate(6.48 18.98 66.34)" /></g>
@@ -167,7 +180,7 @@ const EX=[
   [{H:[40,76],t:18},'Descend — knees forward, torso upright',1500,0],
   [{},'Pause at depth, heels heavy',700,0],
   [{H:[49,50],t:3},'Stand up — elbows stay high',1100,1]]}},
-{id:'split',n:'Bulgarian Split Squat',role:'single',eq:'db',reps:[8,10],work:['Quads','Glutes','Hips'],stress:['Knees'],act:['quads','glutes'],
+{id:'split',n:'Bulgarian Split Squat',role:'single',eq:'db',reps:[8,10],unit:'/side',work:['Quads','Glutes','Hips'],stress:['Knees'],act:['quads','glutes'],
  desc:'Rear-foot-elevated single-leg squat with dumbbells at the sides.',
  cue:'Rear foot on bench. Lower straight down, front shin slightly forward, hips square.',stretch:'At the bottom, feel the rear hip flexor stretch; tuck pelvis slightly.',
  anim:{prop:'db',bench:[8,72,28],frames:[
@@ -175,7 +188,7 @@ const EX=[
   [{H:[49,68],t:16},'Lower straight down, front shin slightly forward',1500,0],
   [{},'Feel the rear hip-flexor stretch',700,0],
   [{H:[51,52],t:10},'Drive through the front heel',1100,1]]}},
-{id:'lunge',n:'Reverse Lunge',role:'single',eq:'db',reps:[8,10],work:['Quads','Glutes'],stress:['Knees'],act:['quads','glutes','hams'],
+{id:'lunge',n:'Reverse Lunge',role:'single',eq:'db',reps:[8,10],unit:'/side',work:['Quads','Glutes'],stress:['Knees'],act:['quads','glutes','hams'],
  desc:'Step back into a deep lunge, then drive back to standing.',
  cue:'Step back long, rear knee kisses the floor, drive through front heel.',stretch:'Long step back, squeeze the rear glute to stretch the hip flexor.',
  anim:{prop:'db',frames:[
@@ -185,7 +198,7 @@ const EX=[
   [{},'Squeeze rear glute — hip-flexor stretch',500,0],
   [{H:[52,58],t:4,f2:[36,90]},'Drive through the front heel',700,1],
   [{H:[55,50],t:0,f2:[55,91],d2:[1,0]},'Return to standing and reset',600,1]]}},
-{id:'stepup',n:'Bench Step-Up',role:'single',eq:'db',reps:[8,10],work:['Quads','Glutes','Calves/ankles'],stress:['Knees'],act:['quads','glutes','calves'],
+{id:'stepup',n:'Bench Step-Up',role:'single',eq:'db',reps:[8,10],unit:'/side',work:['Quads','Glutes','Calves/ankles'],stress:['Knees'],act:['quads','glutes','calves'],
  desc:'Single-leg climb onto the bench with control on the way down.',
  cue:'Whole foot on bench. Stand up using only the top leg; no push from the bottom foot.',stretch:'Lower slowly for 3 s; balance at the top for 1 s.',
  anim:{prop:'db',bench:[48,76,34],frames:[
@@ -201,7 +214,7 @@ const EX=[
   [{H:[34,54],t:72,w1:[-5,27],w2:[-6,27]},'Push hips back — bells slide down the legs',1600,0],
   [{},'Hamstring stretch, spine neutral',700,0],
   [{H:[50,50],t:0,w1:[1,27],w2:[0,27]},'Drive hips forward, squeeze glutes',1100,1]]}},
-{id:'slrdl',n:'Single-Leg RDL',role:'hinge',eq:'kb',reps:[8,10],work:['Hamstrings','Glutes','Core'],stress:['Lower back'],act:['hams','glutes','abs'],
+{id:'slrdl',n:'Single-Leg RDL',role:'hinge',eq:'kb',reps:[8,10],unit:'/side',work:['Hamstrings','Glutes','Core'],stress:['Lower back'],act:['hams','glutes','abs'],
  desc:'One-leg hinge for hamstrings, glutes and balance.',
  cue:'Bell in opposite hand. Hinge as one plank from head to back heel, hips level.',stretch:'Reach long through the back heel; balance — own the bottom.',
  anim:{prop:'kb1',frames:[
@@ -217,7 +230,7 @@ const EX=[
   [{H:[50,50],t:-3,w1:[27,2],w2:[27,3]},'Snap the hips — glutes and quads lock out',500,1],
   [{},'Float: vertical plank, ribs down',350,1],
   [{H:[38,54],t:70,w1:[-22,16],w2:[-22,17]},'Let it fall, hinge late',700,0]]}},
-{id:'bridge',n:'Single-Leg Glute Bridge',role:'hinge',eq:'bw',reps:[10,15],work:['Glutes','Hamstrings'],stress:[],act:['glutes','hams'],
+{id:'bridge',n:'Single-Leg Glute Bridge',role:'hinge',eq:'bw',reps:[10,15],unit:'/side',work:['Glutes','Hamstrings'],stress:[],act:['glutes','hams'],
  desc:'Floor bridge on one leg to isolate the glute.',
  cue:'One foot planted, other knee to chest. Drive through the heel, ribs down.',stretch:'Hold 2 s at the top; hugging the free knee stretches the opposite hip flexor.',
  anim:{frames:[
@@ -241,7 +254,7 @@ const EX=[
   [{H:[48.5,83.9],t:81.4},'Lower for 3 s, elbows ~45°',1500,0],
   [{},'Chest just above the floor',400,0],
   [{H:[45.4,73.3],t:66},'Push the floor away',900,1]]}},
-{id:'press',n:'Half-Kneeling DB Press',role:'push',eq:'db',reps:[6,10],work:['Shoulders','Arms','Core'],stress:['Shoulders','Neck'],act:['delts','triceps','abs'],
+{id:'press',n:'Half-Kneeling DB Press',role:'push',eq:'db',reps:[6,10],unit:'/side',work:['Shoulders','Arms','Core'],stress:['Shoulders','Neck'],act:['delts','triceps','abs'],
  desc:'Single-arm overhead press from a half-kneel for stability.',
  cue:'Down-knee side holds the bell. Squeeze that glute, ribs down, press to lockout by the ear.',stretch:'Full overhead lockout, biceps by ear; slow 3 s lower.',
  anim:{prop:'db1',frames:[
@@ -254,10 +267,10 @@ const EX=[
  cue:'Hollow body, pull elbows to ribs, chest to bar. Use a band if needed.',stretch:'Full dead hang between reps — let the lats lengthen.',
  anim:{bar:1,frames:[
   [{H:[48,48],t:5,f1:[44,87],f2:[42,86],W1:[52,-6],W2:[50,-6]},'Dead hang — lats lengthened',800,0],
-  [{H:[46,32],t:8,f1:[40,71],f2:[38,70]},'Pull elbows to ribs, chest to bar',1000,1],
-  [{},'Chin over bar, squeeze',400,1],
+  [{H:[46,20],t:8,f1:[42,59],f2:[40,58]},'Pull elbows to ribs until the chin clears the bar',1100,1],
+  [{},'Chin over the bar, squeeze 1 s',500,1],
   [{H:[48,48],t:5,f1:[44,87],f2:[42,86]},'Lower fully under control',1400,0]]}},
-{id:'row',n:'Single-Arm DB Row',role:'pull',eq:'db',reps:[8,12],work:['Upper back','Arms'],stress:['Lower back'],act:['lats','traps','biceps','delts'],
+{id:'row',n:'Single-Arm DB Row',role:'pull',eq:'db',reps:[8,12],unit:'/side',work:['Upper back','Arms'],stress:['Lower back'],act:['lats','traps','biceps','delts'],
  desc:'Supported one-arm row with a full lat stretch at the bottom.',
  cue:'Hand and knee on bench, flat back. Row elbow toward the hip.',stretch:'Let the shoulder blade reach forward at the bottom for a lat stretch.',
  anim:{prop:'db1',bench:[40,70,40],frames:[
@@ -274,10 +287,10 @@ const EX=[
   [{w1:[-26,4],w2:[-26,4]},'Arc behind the head — ribs stay down',1600,0],
   [{},'Big lat and chest stretch',600,0],
   [{w1:[4,-27],w2:[4,-27]},'Pull back over the chest',1000,1]]}},
-{id:'facepull',n:'Band Face Pull',role:'pull',eq:'band',reps:[12,20],work:['Upper back','Shoulders'],stress:[],act:['delts','traps'],
+{id:'facepull',n:'Cable Face Pull',role:'pull',eq:'cable',reps:[12,20],work:['Upper back','Shoulders'],stress:[],act:['delts','traps'],
  desc:'Rear-delt and upper-back pull for healthy shoulders.',
- cue:'Band anchored at eye height. Pull to the face, hands apart, thumbs back.',stretch:'Hold 2 s squeezing rear delts; arms fully forward to protract.',
- anim:{band:[104,18],frames:[
+ cue:'Rope on the pulley at eye height. Pull to the face, hands apart, thumbs back.',stretch:'Hold 2 s squeezing rear delts; arms fully forward to protract.',
+ anim:{cable:[100,18],frames:[
   [{H:[47,50],t:-4,f1:[49,91],f2:[46,91],w1:[27,-3],w2:[27,-2],eb1:-1,eb2:-1},'Arms long toward the anchor',700,0],
   [{w1:[4,-13],w2:[3,-13]},'Pull to the face, elbows high, hands apart',900,1],
   [{},'Hold 2 s — squeeze rear delts',900,1],
@@ -340,6 +353,81 @@ const EX=[
   [{H:[52,46],t:-10,f1:[66,62],f2:[64,62]},'Curl the pelvis — knees up past the hips',1000,1],
   [{},'Pause — no swing',400,1],
   [{H:[50,48],t:0,f1:[50,88],f2:[48,88]},'Lower slowly',1300,0]]}},
+{id:'slam',n:'Ball Slam',role:'core',eq:'ball',reps:[8,12],work:['Core','Shoulders','Glutes'],stress:['Lower back','Shoulders'],act:['abs','lats','glutes','delts'],
+ desc:'Lift the ball overhead and drive it into the floor as hard as you can.',
+ cue:'Reach tall with the ball overhead, then hinge and slam it just in front of your feet. Brace and exhale hard.',stretch:'Full overhead reach at the top; squat, never round, to pick it up.',
+ anim:{prop:'ball',frames:[
+  [{H:[50,50],t:0,f1:[53,91],f2:[47,91],w1:[2,-27],w2:[1,-27]},'Ball overhead, reach tall',700,0],
+  [{H:[41,62],t:55,W1:[65,80],W2:[64,80]},'Slam it into the floor in front of your feet',350,1],
+  [{},'Exhale hard, brace',350,1],
+  [{H:[42,66],t:40,W1:[60,84],W2:[59,84]},'Squat down, flat back, pick it up',700,0],
+  [{H:[50,50],t:0,w1:[2,-27],w2:[1,-27]},'Drive up and lift it overhead',700,1]]}},
+{id:'sideslam',n:'Side Ball Slam',role:'core',eq:'ball',reps:[6,10],unit:'/side',work:['Core','Shoulders','Hips'],stress:['Lower back','Shoulders'],act:['abs','lats','glutes','delts'],
+ desc:'Rotational slam: lift overhead, pivot and slam the ball beside one foot.',
+ cue:'Ball overhead, then rotate through the hips and pivot the back foot as you slam beside the outside of the front foot.',stretch:'Reach long overhead every rep; finish facing the slam side, then turn back to centre.',
+ anim:{prop:'ball',frames:[
+  [{H:[50,50],t:0,f1:[56,91],f2:[44,91],w1:[-2,-27],w2:[-3,-27]},'Ball overhead, feet wide',700,0],
+  [{H:[46,60],t:40,f2:[44,90],d2:[.6,.8],W1:[72,85],W2:[71,85]},'Pivot the back foot and slam beside the front foot',400,1],
+  [{},'Exhale hard as it hits',300,1],
+  [{H:[46,64],t:35,W1:[66,85],W2:[65,85]},'Pick it up and turn back to centre',700,0],
+  [{H:[50,50],t:0,f2:[44,91],d2:[1,0],w1:[-2,-27],w2:[-3,-27]},'Lift it overhead again',700,1]]}},
+{id:'bbsquat',n:'Barbell Back Squat',role:'squat',eq:'bb',reps:[5,8],work:['Quads','Glutes','Core'],stress:['Knees','Lower back'],act:['quads','glutes','erectors','abs'],
+ desc:'The classic heavy squat with the bar across the upper back.',
+ cue:'Bar on the upper back, hands just outside the shoulders. Brace, sit down between the heels, knees track over the toes.',stretch:'Go to the full depth you can hold with a neutral spine; pause 1 s at the bottom.',
+ anim:{prop:'bbb',rack:[22],frames:[
+  [{H:[50,50],t:6,f1:[52,91],f2:[49,91],w1:[-4,2],w2:[-5,2]},'Unrack: bar on the upper back, brace hard',900,0],
+  [{H:[38,74],t:38},'Sit down between the heels, chest up',1500,0],
+  [{},'Pause at depth, stay tight',600,0],
+  [{H:[50,50],t:6},'Drive up through mid-foot',1100,1]]}},
+{id:'bbsplit',n:'Barbell Split Squat',role:'single',eq:'bb',reps:[6,10],unit:'/side',work:['Quads','Glutes','Hips'],stress:['Knees'],act:['quads','glutes'],
+ desc:'Static split stance under a barbell: straight down, straight up.',
+ cue:'Long split stance, back heel up. Drop the back knee straight down, front shin near vertical, torso tall.',stretch:'Squeeze the back glute at the bottom to stretch the hip flexor.',
+ anim:{prop:'bbb',rack:[22],frames:[
+  [{H:[50,52],t:2,f1:[64,91],f2:[34,90],d2:[.8,.6],w1:[-4,2],w2:[-5,2]},'Split stance, bar on the upper back',800,0],
+  [{H:[48,68],t:4},'Lower straight down, back knee toward the floor',1400,0],
+  [{},'Back-hip stretch, torso tall',600,0],
+  [{H:[50,52],t:2},'Drive up through the front heel',1000,1]]}},
+{id:'bbbench',n:'Barbell Bench Press',role:'push',eq:'bb',reps:[5,8],work:['Chest','Shoulders','Arms'],stress:['Shoulders','Wrists/elbows'],act:['pecs','delts','triceps'],
+ desc:'Heavy horizontal press from the rack, bar to the lower chest.',
+ cue:'Eyes under the bar, shoulder blades pinned, feet planted. Lower to the lower chest with elbows about 45°.',stretch:'Touch the chest under control with a 1 s pause, then press back over the shoulders.',
+ anim:{prop:'bbf',bench:[10,64,50],rack:[16],frames:[
+  [{H:[50,58],t:-90,f1:[66,91],f2:[64,91],w1:[3,-27],w2:[2,-27]},'Unrack: bar over the shoulders, blades pinned',700,0],
+  [{w1:[6,-7],w2:[5,-7]},'Lower to the lower chest — 2 s',1500,0],
+  [{},'Touch and pause 1 s',500,0],
+  [{w1:[3,-27],w2:[2,-27]},'Press back up over the shoulders',1000,1]]}},
+{id:'incline',n:'Incline Barbell Bench Press',role:'push',eq:'bb',reps:[6,10],work:['Chest','Shoulders','Arms'],stress:['Shoulders','Wrists/elbows'],act:['pecs','delts','triceps'],
+ desc:'Barbell press on a 30–45° bench for the upper chest.',
+ cue:'Bench at 30–45°. Lower the bar to the upper chest, elbows slightly in, wrists stacked over the elbows.',stretch:'Touch the upper chest under control; press up and slightly back over the shoulders.',
+ anim:{prop:'bbf',incline:1,rack:[18],frames:[
+  [{H:[50,62],t:-55,f1:[68,91],f2:[66,91],w1:[1,-27],w2:[0,-27]},'Bar over the shoulders, blades pinned',700,0],
+  [{w1:[7,-5],w2:[6,-5]},'Lower to the upper chest — 2 s',1500,0],
+  [{},'Touch and pause',500,0],
+  [{w1:[1,-27],w2:[0,-27]},'Press up, slightly back over the shoulders',1000,1]]}},
+{id:'cablefly',n:'Cable Chest Fly',role:'push',eq:'cable',reps:[10,15],work:['Chest','Shoulders'],stress:['Shoulders'],act:['pecs','delts'],
+ desc:'Standing fly on the cables: the arms sweep together in a wide hug.',
+ cue:'Staggered stance, slight forward lean, soft elbows locked in place. Sweep the hands together in front of the chest.',stretch:'Let the arms open wide until the chest stretches; 1 s pause, no shrugging.',
+ anim:{cable:[12,4],frames:[
+  [{H:[52,50],t:12,f1:[60,91],f2:[42,91],w1:[-15,2],w2:[-16,3]},'Arms open wide, soft elbows, chest up',800,0],
+  [{},'Feel the chest stretch',500,0],
+  [{w1:[23,4],w2:[22,5]},'Hug the arc: hands meet in front of the chest',1000,1],
+  [{},'Squeeze 1 s',500,1],
+  [{w1:[-15,2],w2:[-16,3]},'Open slowly, control the stretch',1300,0]]}},
+{id:'tricepext',n:'Cable Triceps Pushdown',role:'push',eq:'cable',reps:[10,15],work:['Arms'],stress:['Wrists/elbows'],act:['triceps'],
+ desc:'Elbows pinned at your sides; push the rope down to full lockout.',
+ cue:'Stand tall facing the high pulley, elbows glued to the ribs. Only the forearms move.',stretch:'Let the forearms rise until the triceps stretch; spread the rope at the bottom.',
+ anim:{cable:[84,-8],frames:[
+  [{H:[48,50],t:6,f1:[50,91],f2:[47,91],w1:[9,6],w2:[8,6]},'Elbows pinned, hands at chest height',700,0],
+  [{w1:[4,27],w2:[3,27]},'Push down to full lockout',900,1],
+  [{},'Squeeze 1 s, spread the rope',500,1],
+  [{w1:[9,6],w2:[8,6]},'Let the forearms rise slowly',1200,0]]}},
+{id:'trxrow',n:'TRX 45° Pull-Up',role:'pull',eq:'trx',reps:[8,15],work:['Upper back','Arms','Core'],stress:['Shoulders'],act:['lats','traps','biceps','abs'],
+ desc:'A row on the straps: lean back at about 45° and pull your chest to the handles.',
+ cue:'Body in one straight plank from heels to head. Pull the elbows back past the ribs, chest to the handles.',stretch:'Lower until the arms are straight and the shoulder blades spread. Walk the feet forward to make it harder.',
+ anim:{trx:[86,-14],frames:[
+  [{H:[41,62],t:-45,f1:[70,91],f2:[69,91],d1:[.3,-1],d2:[.3,-1],W1:[43,25],W2:[42,26]},'Lean back at 45°, arms straight, body rigid',800,0],
+  [{H:[46,57],t:-35,W1:[38,33],W2:[37,34]},'Pull the chest to the handles, elbows back',900,1],
+  [{},'Squeeze the shoulder blades 1 s',500,1],
+  [{H:[41,62],t:-45,W1:[43,25],W2:[42,26]},'Lower under control to straight arms',1300,0]]}},
 ];
 const byId=Object.fromEntries(EX.map(e=>[e.id,e]));
 // ---------- explore metadata: pace + common mistakes ----------
@@ -366,6 +454,69 @@ suitcase:['Slow, steady walk for the full time',['Leaning toward or away from th
 tgu:['Slow — 30 to 60 s per rep',['Taking your eyes off the bell or bending the elbow','Rushing the transitions between positions'],'Breathe at each position; never hold the breath through a transition.'],
 deadbug:['3 s reach · 1 s exhale · 2 s return',['Lower back lifting off the floor','Moving fast and holding the breath'],'Exhale fully as you reach long; inhale as you return.'],
 kneeraise:['1 s up · 1 s pause · 2 s down',['Swinging the body for momentum','Lifting the knees without curling the pelvis']]};
+
+Object.assign(XM,{
+slam:['Lift 1 s · slam fast · reset 1 s',['Rounding the back to pick the ball up','Arms doing the work instead of the hips and core']],
+sideslam:['Lift 1 s · slam fast · reset 1 s',['Twisting from the lower back instead of pivoting the foot','Losing the overhead reach between reps']],
+bbsquat:['3 s down · 1 s pause · 1 s up',['Hips shooting up first so it becomes a good morning','Knees caving in or heels lifting']],
+bbsplit:['3 s down · 1 s pause · 1 s up',['Stance too short so the front heel lifts','Leaning the torso forward over the front knee']],
+bbbench:['2 s down · 1 s pause · 1 s up',['Bouncing the bar off the chest','Elbows flared to 90° or wrists bent back']],
+incline:['2 s down · 1 s pause · 1 s up',['Bench set too steep so it turns into a shoulder press','Lower back arching off the pad']],
+cablefly:['1 s together · 1 s squeeze · 3 s open',['Bending and straightening the elbows so it becomes a press','Shrugging the shoulders as the arms open']],
+tricepext:['1 s down · 1 s squeeze · 2 s up',['Elbows drifting forward off the ribs','Leaning over the rope to push with bodyweight']],
+trxrow:['1 s pull · 1 s squeeze · 3 s down',['Hips sagging out of the plank','Shrugging toward the ears instead of pulling the elbows back']],
+facepull:['1 s pull · 2 s hold · 2 s return',['Shrugging the shoulders toward the ears','Pulling to the chest with the elbows low']]});
+// ---------- equipment, load and sides ----------
+const EQL={db:'Dumbbells',kb:'Kettlebells',bench:'Bench',pullbar:'Pull-up bar',band:'Resistance bands',ball:'Slam ball',barbell:'Barbell + plates',rack:'Rack',cable:'Cable machine',trx:'TRX'};
+const REQ={goblet:['kb'],frontsquat:['db'],split:['db','bench'],lunge:['db'],stepup:['db','bench'],rdl:['db'],slrdl:['kb'],swing:['kb'],bridge:[],bench:['db','bench'],pushup:[],press:['db'],pullup:['pullbar'],row:['db','bench'],pullover:['db','bench'],facepull:['cable'],curlpress:['db'],skull:['db','bench'],suitcase:['db'],tgu:['kb'],deadbug:[],kneeraise:['pullbar'],slam:['ball'],sideslam:['ball'],bbsquat:['barbell','rack'],bbsplit:['barbell','rack'],bbbench:['barbell','rack','bench'],incline:['barbell','rack','bench'],cablefly:['cable'],tricepext:['cable'],trxrow:['trx']};
+// movement families: at most one per session (no goblet squat + front squat)
+const FAM={goblet:'squat2',frontsquat:'squat2',bbsquat:'squat2',split:'split',lunge:'split',bbsplit:'split',stepup:'stepup',rdl:'hinge2',slrdl:'hinge1',swing:'swing',bridge:'bridge',bench:'flatpress',pushup:'flatpress',bbbench:'flatpress',incline:'incline',press:'ohp',curlpress:'curlpress',pullup:'vpull',kneeraise:'hang',row:'row',trxrow:'row',pullover:'pullover',facepull:'facepull',cablefly:'fly',skull:'tri',tricepext:'tri',suitcase:'carry',tgu:'tgu',deadbug:'deadbug',slam:'slam',sideslam:'slam'};
+const ISO={skull:1,tricepext:1,cablefly:1};
+const BOTHL='Both legs work together.',BOTHA='Both arms work together.',ONELEG='Do all reps on one leg, then switch legs.',ONEARM='Do all reps on one arm, then switch arms.';
+const HS={
+goblet:['One kettlebell, held by the horns at your chest.',BOTHL],
+frontsquat:['Two dumbbells, one resting on each shoulder.',BOTHL],
+split:['Two dumbbells, one at each side.',ONELEG],
+lunge:['Two dumbbells, one at each side.',ONELEG],
+stepup:['Two dumbbells, one at each side.',ONELEG],
+rdl:['Two dumbbells, one in front of each thigh.',BOTHL],
+slrdl:['One kettlebell, in the hand opposite the standing leg.',ONELEG],
+swing:['One kettlebell, both hands on the handle.','Both sides work together.'],
+bridge:['No weight — bodyweight only.',ONELEG],
+bench:['Two dumbbells, one in each hand.',BOTHA],
+pushup:['No weight. Hands on the floor, or on dumbbell handles to go deeper.',BOTHA],
+press:['One dumbbell, at the shoulder on the side of the down knee.',ONEARM],
+pullup:['Bodyweight on the bar; a band can assist.',BOTHA],
+row:['One dumbbell, in the working hand.',ONEARM],
+pullover:['One dumbbell, held in both hands under the top plate.',BOTHA],
+facepull:['Rope on the cable at eye height, one end in each hand.',BOTHA],
+curlpress:['Two dumbbells, one in each hand.',BOTHA],
+skull:['Two dumbbells, one in each hand.',BOTHA],
+suitcase:['One heavy dumbbell, in one hand at your side.','Carry for the full time in one hand, then switch hands and repeat.'],
+tgu:['One kettlebell, locked out overhead in one hand.','Do all reps on one side, then switch sides.'],
+deadbug:['No weight.','Alternate sides each rep; count reps per side.'],
+kneeraise:['Bodyweight, hanging from the bar.',BOTHL],
+slam:['One slam ball, held in both hands.','Both sides work together.'],
+sideslam:['One slam ball, held in both hands.','Do all reps to one side, then switch sides.'],
+bbsquat:['One barbell, resting across your upper back.',BOTHL],
+bbsplit:['One barbell, resting across your upper back.',ONELEG],
+bbbench:['One barbell, both hands just outside shoulder width.',BOTHA],
+incline:['One barbell, both hands just outside shoulder width; bench at 30–45°.',BOTHA],
+cablefly:['One cable handle in each hand, pulleys set at chest height or higher. On a single pulley, work one arm at a time.',BOTHA],
+tricepext:['One rope or bar on a high pulley, both hands.',BOTHA],
+trxrow:['Bodyweight; one TRX handle in each hand.',BOTHA]};
+EX.forEach(e=>{e.req=REQ[e.id]||[];e.fam=FAM[e.id]||e.id;const h=HS[e.id]||['',''];e.hold=h[0];e.sides=h[1]});
+// ---------- locations ----------
+function defLoc(st){return{id:'home',name:'Home',eq:Object.keys(EQL),db:(st&&st.db)||[5,10,15,20,25,30,35,40,45,50],kb:(st&&st.kb)||[18,26,35,44,53],bar:45,bbMax:315,cMin:5,cMax:150,cStep:5,ball:15}}
+function migrate(D){D.settings=D.settings||{};const st=D.settings;if(!st.ideal)st.ideal=60;if(!st.rest)st.rest=60;if(!st.rounds)st.rounds=3;if(!st.minutes)st.minutes=st.ideal;
+ D.log=D.log||{};D.sessions=D.sessions||[];if(!Array.isArray(D.locs)||!D.locs.length){D.locs=[defLoc(st)];D.loc='home'}if(!D.locs.some(l=>l.id===D.loc))D.loc=D.locs[0].id;D.v=3;return D}
+migrate(S);
+function curLoc(){const id=(S.current&&S.current.loc)||S.loc;return S.locs.find(l=>l.id===id)||S.locs[0]}
+function hasEq(e,L){L=L||curLoc();return e.req.every(k=>L.eq.includes(k))}
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function plateMath(total,bar){let side=(total-bar)/2;if(side<0)return'';const out=[];for(const p of[45,35,25,10,5,2.5]){while(side>=p-1e-9){out.push(p);side-=p}}return out.length?out.join(' + ')+' lb per side':'Empty bar'}
+function wLabel(eq){return eq==='db'?'Weight (lb, per dumbbell)':eq==='kb'?'Kettlebell (lb)':eq==='bb'?'Total (lb, incl. bar)':eq==='cable'?'Stack (lb)':eq==='ball'?'Ball (lb)':'Weight (lb)'}
+
 EX.forEach(e=>{const m=XM[e.id]||[];e.pace=m[0]||'Controlled — slow on the way down';e.mist=m[1]||[];e.breath=m[2]||'Inhale and brace before the lowering phase; exhale through the hardest part of the lift.'});
 
 // ---------- animation engine ----------
@@ -408,6 +559,10 @@ function drawFig(e,ts,c){let{P,inten,act}=state(e,ts);if(c&&c.only){act=[c.only]
  let s=`<defs><filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation=".9" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>`;
  s+=`<line x1="-10" y1="94.5" x2="110" y2="94.5" stroke="#3a3f44" stroke-width=".8"/><ellipse cx="${f((A1[0]+A2[0])/2)}" cy="95.6" rx="18" ry="1.6" fill="#000" opacity=".45"/>`;
  if(A.bench){const[x,y,w]=A.bench;s+=`<rect x="${x}" y="${y}" width="${w}" height="4.5" rx="1.5" fill="#3a3530" stroke="#5c544b" stroke-width=".6"/><line x1="${x+5}" y1="${y+4.5}" x2="${x+3}" y2="94" stroke="#555b61" stroke-width="2"/><line x1="${x+w-5}" y1="${y+4.5}" x2="${x+w-3}" y2="94" stroke="#555b61" stroke-width="2"/>`}
+ if(A.rack)A.rack.forEach(x=>{s+=`<g opacity=".7"><line x1="${x}" y1="94" x2="${x}" y2="-4" stroke="#555b61" stroke-width="2.2"/><rect x="${x-1}" y="${A.bench||A.incline?24:3}" width="5" height="2.2" rx=".6" fill="#7a8087"/></g>`});
+ if(A.incline){const a=tl(-3,-6.2),b=tl(31,-6.2);s+=`<line x1="${f(a[0])}" y1="${f(a[1])}" x2="${f(b[0])}" y2="${f(b[1])}" stroke="#3a3530" stroke-width="4.5" stroke-linecap="round"/><line x1="${f(a[0]-2)}" y1="${f(a[1]+1)}" x2="${f(a[0]+18)}" y2="${f(a[1]+1)}" stroke="#3a3530" stroke-width="4.5" stroke-linecap="round"/><line x1="${f(a[0]+12)}" y1="${f(a[1]+3)}" x2="${f(a[0]+12)}" y2="94" stroke="#555b61" stroke-width="2"/><line x1="${f(b[0]+4)}" y1="${f(b[1]+3)}" x2="${f(a[0]-2)}" y2="94" stroke="#555b61" stroke-width="1.6"/>`}
+ if(A.cable){const[x,y]=A.cable;s+=`<rect x="${x-3}" y="${y-5}" width="6" height="${99-y}" rx="1" fill="#24282d" stroke="#555b61" stroke-width=".6"/>${[0,1,2,3,4].map(i=>`<rect x="${x-2.2}" y="${82+i*2.2}" width="4.4" height="1.6" fill="#555b61"/>`).join('')}<circle cx="${x}" cy="${y}" r="1.9" fill="#3a3f44" stroke="#a9adb3" stroke-width=".5"/><line x1="${x}" y1="${y}" x2="${f(W2[0])}" y2="${f(W2[1])}" stroke="#c9ced4" stroke-width=".55" opacity=".45"/><line x1="${x}" y1="${y}" x2="${f(W1[0])}" y2="${f(W1[1])}" stroke="#c9ced4" stroke-width=".7"/>`}
+ if(A.trx){const[x,y]=A.trx;s+=`<rect x="${x-2}" y="${y-2}" width="4" height="3" fill="#555b61"/><line x1="${x}" y1="${y}" x2="${f(W2[0])}" y2="${f(W2[1])}" stroke="#d9b23a" stroke-width="1" opacity=".5"/><line x1="${x}" y1="${y}" x2="${f(W1[0])}" y2="${f(W1[1])}" stroke="#d9b23a" stroke-width="1.3"/>`}
  if(A.bar)s+=`<line x1="16" y1="-6" x2="84" y2="-6" stroke="#a9adb3" stroke-width="2"/><line x1="16" y1="-16" x2="16" y2="-6" stroke="#555b61" stroke-width="2"/><line x1="84" y1="-16" x2="84" y2="-6" stroke="#555b61" stroke-width="2"/>`;
  if(A.band)s+=`<rect x="${A.band[0]-2}" y="${A.band[1]-8}" width="6" height="16" fill="#555b61"/><line x1="${A.band[0]}" y1="${A.band[1]}" x2="${f(W1[0])}" y2="${f(W1[1])}" stroke="#d98b3a" stroke-width="1.3"/><line x1="${A.band[0]}" y1="${A.band[1]}" x2="${f(W2[0])}" y2="${f(W2[1])}" stroke="#d98b3a" stroke-width="1" opacity=".5"/>`;
  // far side
@@ -425,6 +580,10 @@ function drawFig(e,ts,c){let{P,inten,act}=state(e,ts);if(c&&c.only){act=[c.only]
  if(A.prop==='db1')s+=db(W1);
  if(A.prop==='kb1'){const fu=frameOf(E1,W1).u;s+=kb(W1,add(W1,fu,5.5))}
  if(A.prop==='kbg')s+=kb(W1,[W1[0],W1[1]+5.5]);
+ const plate=(p,k=1)=>`<g transform="translate(${f(p[0])} ${f(p[1])}) scale(${k}) translate(${f(-p[0])} ${f(-p[1])})"><circle cx="${f(p[0])}" cy="${f(p[1])}" r="6.4" fill="#1a1c1f" stroke="#a9adb3" stroke-width=".6"/><circle cx="${f(p[0])}" cy="${f(p[1])}" r="4.6" fill="none" stroke="#3a3f44" stroke-width=".5"/><circle cx="${f(p[0])}" cy="${f(p[1])}" r="1.3" fill="#a9adb3"/></g>`;
+ if(A.prop==='bbf')s+=plate(lp(W1,W2,.5));
+ if(A.prop==='bbb')s+=plate(tl(24.6,-5.8),.82);
+ if(A.prop==='ball'){const c=add(lp(W1,W2,.5),frameOf(E1,W1).u,3.2);s+=`<circle cx="${f(c[0])}" cy="${f(c[1])}" r="4.4" fill="#1d2024" stroke="#a9adb3" stroke-width=".6"/><path d="M${f(c[0]-4.2)} ${f(c[1]-1)}Q${f(c[0])} ${f(c[1]+2.4)} ${f(c[0]+4.2)} ${f(c[1]-1)}" fill="none" stroke="#555b61" stroke-width=".5"/>`}
  return s}
 function svg(id,size){return`<svg class="fig" data-ex="${id}" viewBox="-10 -16 120 114" width="${size}" height="${Math.round(size*.95)}" role="img" aria-label="${byId[id].n} movement"></svg>`}
 function stepsList(id){return`<ol class="steps" data-ex="${id}">${byId[id].steps.map(s=>`<li>${s.replace(/^\d+\.\s*/,'')}</li>`).join('')}</ol>`}
@@ -440,19 +599,27 @@ let _lt=0;(function tick(ts){requestAnimationFrame(tick);if(ts-_lt<33)return;_lt
 // ---------- generator ----------
 function lenOpts(){const I=S.settings.ideal||60;return[I-15,I-10,I]}
 let checkin={hurt:new Set(),sore:new Set(),work:new Set(),rounds:S.settings.rounds,minutes:lenOpts().includes(S.settings.minutes)?S.settings.minutes:S.settings.ideal};
-function score(e){if(e.stress.some(a=>checkin.hurt.has(a))||e.work.some(a=>checkin.hurt.has(a)))return -999;
+// variety: look back 7 days; one exercise per movement family per session
+function weekUse(){const cut=Date.now()-7*864e5,m={};S.sessions.filter(x=>new Date(x.date).getTime()>=cut).forEach(x=>new Set(x.exercises).forEach(id=>m[id]=(m[id]||0)+1));return m}
+function lastRecent(){const l=S.sessions[S.sessions.length-1];return l&&Date.now()-new Date(l.date).getTime()<7*864e5?l.exercises:[]}
+let WK=null,LAST=null,RELAX=[];
+function score(e){if(!hasEq(e))return -999;if(e.stress.some(a=>checkin.hurt.has(a))||e.work.some(a=>checkin.hurt.has(a)))return -999;
  let s=Math.random()*1.5;e.work.forEach(a=>{if(checkin.work.has(a))s+=3;if(checkin.sore.has(a))s-=2});
- const last=S.sessions.slice(-2).flatMap(x=>x.exercises);if(last.includes(e.id))s-=1; // variety
- return s}
-function pick(role,used){const c=EX.filter(e=>e.role===role&&!used.has(e.id)).map(e=>[score(e),e]).filter(x=>x[0]>-100).sort((a,b)=>b[0]-a[0]);return c[0]?c[0][1]:null}
-function generate(){const used=new Set();const four=checkin.minutes>=50,nC=checkin.minutes>=75?3:2;
+ const wk=WK||weekUse(),last=LAST||lastRecent();
+ if(last.includes(e.id)||(wk[e.id]||0)>=2)s-=40;else if(wk[e.id])s-=3;
+ if(ISO[e.id])s-=.8;return s}
+function pick(role,used,fams){const c=EX.filter(e=>e.role===role&&!used.has(e.id)).map(e=>{const b=score(e);return[b-(fams&&fams.has(e.fam)?60:0),e,b]}).filter(x=>x[2]>-500).sort((a,b)=>b[0]-a[0]);
+ return c[0]?c[0][1]:null}
+const FB={squat:['hinge','single','core','pull','push'],hinge:['single','squat','core','pull','push'],single:['hinge','squat','core','pull','push'],push:['pull','core','single','hinge','squat'],pull:['push','core','hinge','single','squat'],core:['hinge','pull','push','single','squat']};
+function generate(){RELAX=[];WK=weekUse();LAST=lastRecent();const used=new Set(),fams=new Set(),m=checkin.minutes,four=m>=50,nC=m>=75?3:2;
  const R=[['squat','push','pull','core'],['hinge','single','pull','push'],['single','push','pull','core']].slice(0,nC);
- // if user targets something, swap the 4th slot toward it
- const plan=R.map(roles=>{const r=four?roles:roles.slice(0,3);const out=[];
-  r.forEach(role=>{let e=pick(role,used);if(!e){for(const alt of['core','hinge','pull','push','single','squat']){e=pick(alt,used);if(e)break}}if(e){used.add(e.id);out.push(e.id)}});return out});
- return plan}
+ const plan=R.map(roles=>{const r=four?roles:roles.slice(0,3),out=[];
+  r.forEach(role=>{let e=pick(role,used,fams);if(!e||(fams.has(e.fam)))for(const alt of FB[role]){const a=pick(alt,used,fams);if(a&&!fams.has(a.fam)){e=a;break}}if(e){used.add(e.id);fams.add(e.fam);out.push(e.id)}});return out}).filter(c=>c.length);
+ RELAX=plan.flat().filter(id=>LAST.includes(id)||(WK[id]||0)>=2).map(id=>byId[id].n);WK=LAST=null;return plan}
 // ---------- progression ----------
-function stepList(eq){return eq==='db'?S.settings.db:eq==='kb'?S.settings.kb:null}
+function stepList(eq){const L=curLoc(),r=(a,b,st)=>{const o=[];for(let w=a;w<=b+1e-9;w+=st)o.push(Math.round(w*10)/10);return o};let o=null;
+ if(eq==='db')o=L.db;else if(eq==='kb')o=L.kb;else if(eq==='bb')o=r(L.bar,L.bbMax,5);else if(eq==='cable')o=r(L.cMin,L.cMax,L.cStep||5);else if(eq==='ball')o=[L.ball];
+ return o&&o.length?o:null}
 function nearest(list,w){return list.reduce((p,c)=>Math.abs(c-w)<Math.abs(p-w)?c:p,list[0])}
 function shift(eq,w,dir){const L=stepList(eq);if(!L)return w;const i=L.indexOf(nearest(L,w));return L[Math.max(0,Math.min(L.length-1,i+dir))]}
 function suggestStart(id){const e=byId[id],h=S.log[id],L=stepList(e.eq);
@@ -461,7 +628,7 @@ function suggestStart(id){const e=byId[id],h=S.log[id],L=stepList(e.eq);
  if(rate==='easy'){if(L){w=shift(e.eq,w,1);reps=e.reps[0];note+=' → load up.'}else{reps=Math.min(reps+2,e.reps[1]+5);note+=' → more reps / slower tempo.'}}
  else if(rate==='right'){reps=Math.min(reps+1,e.reps[1]);if(L&&h.last.reps>=e.reps[1]){w=shift(e.eq,w,1);reps=e.reps[0];note+=' → top of range, load up.'}else note+=' → beat it by a rep.'}
  else{if(L){w=shift(e.eq,w,-1);note+=' → back off one step, own the form.'}else{reps=Math.max(e.reps[0],reps-2);note+=' → fewer reps, strict.'}}
- return{w,reps,note}}
+ return{w:L?nearest(L,w):w,reps,note}}
 function nextSet(id,w,reps,rate){const e=byId[id],L=stepList(e.eq);
  if(rate==='easy'){if(L&&w<L[L.length-1])return{w:shift(e.eq,w,1),reps:e.reps[0],note:'Easy → up one weight.'};return{w,reps:reps+2,note:'Easy → +2 reps, 3 s lowering.'}}
  if(rate==='right')return{w,reps:Math.min(reps+1,e.reps[1]+(L?0:5)),note:'Right on → same weight, chase one more rep.'};
@@ -471,7 +638,7 @@ function nextSet(id,w,reps,rate){const e=byId[id],L=stepList(e.eq);
 const app=document.getElementById('app');let view='start';
 const LET=i=>'ABCD'[i]||String(i+1);
 const ROLE={squat:'Squat',hinge:'Hinge',single:'Single-leg',push:'Push',pull:'Pull',core:'Core / carry'};
-const EQN={db:'Dumbbells',kb:'Kettlebell',bw:'Bodyweight',bar:'Pull-up bar',band:'Resistance band'};
+const EQN={db:'Dumbbells',kb:'Kettlebell',bw:'Bodyweight',bar:'Pull-up bar',band:'Resistance band',bb:'Barbell',cable:'Cable',ball:'Slam ball',trx:'TRX'};
 const MUS={quads:'Quadriceps',hams:'Hamstrings',calves:'Calves',glutes:'Glutes',erectors:'Spinal erectors',lats:'Lats',traps:'Traps / upper back',pecs:'Chest (pecs)',delts:'Shoulders (delts)',biceps:'Biceps',triceps:'Triceps',forearms:'Forearms / grip',abs:'Abs / core'};
 const ic=d=>`<svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false">${d}</svg>`;
 const ICON={play:ic('<path d="M7 4.5v15l12.5-7.5z" fill="currentColor"/>'),
@@ -483,23 +650,24 @@ const ICON={play:ic('<path d="M7 4.5v15l12.5-7.5z" fill="currentColor"/>'),
  x:ic('<path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>'),
  list:ic('<path d="M8 6h12M8 12h12M8 18h12" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="4" cy="6" r="1.4" fill="currentColor"/><circle cx="4" cy="12" r="1.4" fill="currentColor"/><circle cx="4" cy="18" r="1.4" fill="currentColor"/>'),
  check:ic('<path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>')};
-function nav(v){view=v;const tab=['work','preview','pick','explore','done'].includes(v)?'start':v;
+function nav(v){view=v;const tab=['work','preview','pick','explore','done'].includes(v)?'start':v==='loc'?'set':v;
  document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on',b.dataset.v===tab));render();window.scrollTo(0,0)}
 document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>nav(S.current&&b.dataset.v==='start'?'work':b.dataset.v));
-function render(){({start:vStart,preview:vPreview,work:vWork,hist:vHist,set:vSet,done:vDone,pick:vPick,explore:vExplore})[view]()}
+function render(){({start:vStart,preview:vPreview,work:vWork,hist:vHist,set:vSet,done:vDone,pick:vPick,explore:vExplore,loc:vLoc})[view]()}
 function dockPad(){const d=app.querySelector('.dock');document.body.classList.toggle('has-dock',!!d);app.style.paddingBottom=d?(d.offsetHeight+24)+'px':''}
 function toast(msg){const t=document.createElement('div');t.className='toast';t.setAttribute('role','status');t.textContent=msg;document.body.appendChild(t);setTimeout(()=>t.remove(),2600)}
 function rateBtns(k,cur){return`<div class="rmini" data-k="${k}">${[['easy','Easy','e'],['right','Right','r'],['hard','Hard','h']].map(([r,l,c])=>`<button data-r="${r}" class="${c} ${cur===r?'sel':''}">${l}</button>`).join('')}</div>`}
 function wireRate(root,onRate){root.querySelectorAll('.rmini').forEach(g=>g.querySelectorAll('button').forEach(b=>b.onclick=()=>{onRate(+g.dataset.k,b.dataset.r);g.querySelectorAll('button').forEach(x=>x.classList.toggle('sel',x===b))}))}
-function setupCard(plan,targets){const eq=new Set();let bench=0;plan.flat().forEach(id=>{const e=byId[id];eq.add(e.eq);if(e.anim.bench)bench=1});
- const items=[...eq].filter(x=>x!=='bw').map(x=>EQN[x]);if(bench)items.push('Flat bench');
- const wts=plan.flat().map(id=>{const e=byId[id],t=targets[id];return stepList(e.eq)&&t?`<li><b>${t.w} lb</b> ${e.eq==='kb'?'kettlebell':'dumbbell'} — ${e.n}</li>`:''}).join('');
- return`<div class="card"><b>Set up</b><div class="mut">${items.join(' · ')||'Bodyweight only'}</div>${wts?`<ul class="setup">${wts}</ul>`:''}</div>`}
+function holdBox(e){return`<div class="hold"><div><b>Load</b><span>${e.hold}</span></div><div><b>Sides</b><span>${e.sides}</span></div></div>`}
+function setupCard(plan,targets){const eq=new Set();plan.flat().forEach(id=>byId[id].req.forEach(k=>eq.add(k)));const L=curLoc();
+ const wts=plan.flat().map(id=>{const e=byId[id],t=targets[id];if(!stepList(e.eq)||!t)return'';const what=e.eq==='db'?(/^Two/.test(e.hold)?'2 × '+t.w+' lb dumbbells':t.w+' lb dumbbell'):e.eq==='kb'?t.w+' lb kettlebell':e.eq==='bb'?t.w+' lb barbell ('+plateMath(t.w,L.bar)+')':e.eq==='cable'?t.w+' lb on the stack':t.w+' lb ball';return`<li><b>${what}</b> — ${e.n}</li>`}).join('');
+ return`<div class="card"><b>Set up at ${esc(L.name)}</b><div class="mut">${[...eq].map(k=>EQL[k]).join(' · ')||'Bodyweight only'}</div>${wts?`<ul class="setup">${wts}</ul>`:''}</div>`}
 
 let mode='hurt';
 function vStart(){const n=S.sessions.length;const opts=lenOpts();if(!opts.includes(checkin.minutes))checkin.minutes=opts[2];
  app.innerHTML=`<h2>How do you feel today?</h2><div class="mut">${today()}${n?` · Session #${n+1}`:''}</div>
  ${S.current?'<button class="btn" id="resume" style="margin-top:12px">Resume workout in progress</button><button class="btn sec" id="vplan">View full workout</button>':''}
+ <div class="locrow"><span class="mut">Training at</span><div class="chips" id="locs">${S.locs.map(l=>`<button class="chip ${l.id===S.loc?'work':''}" data-l="${l.id}" aria-pressed="${l.id===S.loc}">${esc(l.name)}</button>`).join('')}<button class="chip" id="mloc" aria-label="Manage locations">+ Manage</button></div></div>
  <h3>Tap an area, then choose what it is</h3>
  <div class="seg" id="mode"><button data-m="hurt">Hurts</button><button data-m="sore">Sore / tight</button><button data-m="work">Want to work</button></div>
  <div class="legend mut" style="margin:8px 0"><span style="color:#e06666">Hurts = avoided</span><span style="color:#e3c46a">Sore = lighter, mobility</span><span style="color:var(--acc)">Work = prioritized</span></div>
@@ -513,15 +681,16 @@ function vStart(){const n=S.sessions.length;const opts=lenOpts();if(!opts.includ
  app.querySelectorAll('#areas button').forEach(b=>b.onclick=()=>{const a=b.dataset.a,was=checkin[mode].has(a);['hurt','sore','work'].forEach(k=>checkin[k].delete(a));if(!was)checkin[mode].add(a);vStart()});
  app.querySelectorAll('#mins button').forEach(b=>b.onclick=()=>{checkin.minutes=+b.dataset.x;vStart()});
  app.querySelectorAll('#rnds button').forEach(b=>b.onclick=()=>{checkin.rounds=+b.dataset.x;vStart()});
+ app.querySelectorAll('#locs [data-l]').forEach(b=>b.onclick=()=>{S.loc=b.dataset.l;save();vStart()});app.querySelector('#mloc').onclick=()=>nav('set');
  app.querySelector('#go').onclick=()=>{plan=generate();planSrc='auto';nav('preview')};
  app.querySelector('#choose').onclick=()=>{if(!pk)pk=newPick();pk.mode='choose';nav('pick')};
  const r=app.querySelector('#resume');if(r){r.onclick=()=>nav('work');app.querySelector('#vplan').onclick=showPlan}}
 
 // ---------- choose / explore ----------
 let pk=null;
-function newPick(){return{mode:'choose',nc:2,per:0,rounds:checkin.rounds,minutes:checkin.minutes,sel:[[],[],[],[]],act:0,filter:'all',exp:[]}}
+function newPick(){return{all:false,mode:'choose',nc:2,per:0,rounds:checkin.rounds,minutes:checkin.minutes,sel:[[],[],[],[]],act:0,filter:'all',exp:[]}}
 function vPick(){if(!pk)pk=newPick();const P=pk,ch=P.mode==='choose';
- const list=EX.filter(e=>P.filter==='all'||e.role===P.filter);
+ const list=EX.filter(e=>(P.filter==='all'||e.role===P.filter)&&(P.all||hasEq(e)));const LOC=curLoc(),hidden=EX.filter(e=>!hasEq(e)).length;
  const where=id=>P.sel.findIndex((c,i)=>i<P.nc&&c.includes(id));
  const total=P.sel.slice(0,P.nc).reduce((a,c)=>a+c.length,0);
  const segN=(id,vals,cur,lab=v=>v)=>`<div class="seg sm" id="${id}">${vals.map(v=>`<button data-x="${v}" class="${cur==v?'on':''}">${lab(v)}</button>`).join('')}</div>`;
@@ -536,15 +705,16 @@ function vPick(){if(!pk)pk=newPick();const P=pk,ch=P.mode==='choose';
   <div class="ctabs" id="ctabs">${Array.from({length:P.nc},(_,i)=>`<button data-c="${i}" class="${P.act==i?'on':''}">Circuit ${LET(i)} <small>${P.sel[i].length}${P.per?'/'+P.per:''}</small></button>`).join('')}</div>
   <div class="mut" style="margin:6px 0">Tick exercises to add them to <b style="color:var(--acc)">Circuit ${LET(P.act)}</b>, in the order you want them. Tap a card for its full breakdown.</div>`
  :`<div class="mut" style="margin:10px 0">Tick exercises to queue them, then step through each one full-screen — or tap any card to open it now.</div>`}
+ <div class="opt" style="margin-top:6px"><span>At <b style="color:var(--ink)">${esc(LOC.name)}</b>${hidden&&!P.all?` · ${hidden} need other equipment`:''}</span><button class="pill" id="pall" aria-pressed="${P.all}">${P.all?'Showing all equipment':'Show all equipment'}</button></div>
  <div class="chips" id="pf" style="margin:8px 0">${['all',...Object.keys(ROLE)].map(r=>`<button class="chip ${P.filter==r?'work':''}" data-f="${r}">${r==='all'?'All':ROLE[r]}</button>`).join('')}</div>
  <div id="plist">${list.map(e=>{const w=where(e.id),on=ch?w>=0:P.exp.includes(e.id),pos=w>=0?P.sel[w].indexOf(e.id)+1:0;return`<div class="card pk ${on?'pon':''}">
    <label class="ck"><input type="checkbox" data-id="${e.id}" ${on?'checked':''} aria-label="${ch?'Choose':'Explore'} ${e.n}"><span class="box">${on?(ch?LET(w)+pos:ICON.check):''}</span></label>
-   <button class="pbody" data-open="${e.id}" aria-label="Open ${e.n} details">${svg(e.id,84)}<span class="ptxt"><b>${e.n}</b><span class="desc">${e.desc}</span><span class="mut">${ROLE[e.role]} · ${EQN[e.eq]} · ${e.reps[0]}–${e.reps[1]}${e.unit||''}</span></span></button></div>`}).join('')}</div>
+   <button class="pbody" data-open="${e.id}" aria-label="Open ${e.n} details">${svg(e.id,84)}<span class="ptxt"><b>${e.n}</b><span class="desc">${e.desc}</span><span class="mut">${ROLE[e.role]} · ${EQN[e.eq]} · ${e.reps[0]}–${e.reps[1]}${e.unit||''}</span>${hasEq(e)?'':`<span class="tag warn" style="align-self:flex-start">Needs ${e.req.filter(k=>!LOC.eq.includes(k)).map(k=>EQL[k]).join(', ')}</span>`}</span></button></div>`}).join('')||'<div class="mut" style="margin:16px 0">Nothing in this category at this location. Tap “Show all equipment” to see everything.</div>'}</div>
  <div class="dock"><div class="dk">${ch?`<button class="btn" id="pgo" ${total?'':'disabled'}>Review workout · ${total} exercise${total==1?'':'s'} ${ICON.right}</button>`
   :`<button class="btn" id="pgo" ${P.exp.length?'':'disabled'}>Explore ${P.exp.length?P.exp.length+' selected':'— tick some first'} ${ICON.right}</button>`}</div></div>`;
  const re=()=>{const y=window.scrollY;vPick();window.scrollTo(0,y)};
  app.querySelectorAll('#pmode button').forEach(b=>b.onclick=()=>{P.mode=b.dataset.m;re()});
- app.querySelectorAll('#pf button').forEach(b=>b.onclick=()=>{P.filter=b.dataset.f;re()});
+ app.querySelectorAll('#pf button').forEach(b=>b.onclick=()=>{P.filter=b.dataset.f;re()});app.querySelector('#pall').onclick=()=>{P.all=!P.all;re()};
  if(ch){app.querySelectorAll('#pnc button').forEach(b=>b.onclick=()=>{P.nc=+b.dataset.x;P.act=Math.min(P.act,P.nc-1);re()});
   app.querySelectorAll('#pper button').forEach(b=>b.onclick=()=>{P.per=+b.dataset.x;if(P.per){let cut=0;P.sel.forEach((c,i)=>{if(c.length>P.per){cut+=c.length-P.per;P.sel[i]=c.slice(0,P.per)}});if(cut)toast(`Trimmed ${cut} exercise${cut>1?'s':''} to fit ${P.per} per circuit`)}re()});
   app.querySelectorAll('#prd button').forEach(b=>b.onclick=()=>{P.rounds=+b.dataset.x;re()});
@@ -555,7 +725,7 @@ function vPick(){if(!pk)pk=newPick();const P=pk,ch=P.mode==='choose';
   const w=where(id);if(w>=0){P.sel[w]=P.sel[w].filter(x=>x!==id);return re()}
   let c=P.act;if(P.per&&P.sel[c].length>=P.per){const full=c;c=[...Array(P.nc).keys()].find(i=>P.sel[i].length<P.per);
    if(c===undefined){toast('Every circuit is full — raise exercises per circuit or add a circuit');return re()}P.act=c;toast(`Circuit ${LET(full)} is full — added to Circuit ${LET(c)}`)}
-  P.sel[c].push(id);re()});
+  P.sel[c].push(id);if(!hasEq(byId[id]))toast(`Added — note ${esc(LOC.name)} doesn’t list ${byId[id].req.filter(k=>!LOC.eq.includes(k)).map(k=>EQL[k]).join(', ')}`);re()});
  app.querySelectorAll('[data-open]').forEach(b=>b.onclick=()=>{const id=b.dataset.open;expQ=P.exp.includes(id)?P.exp.slice():list.map(e=>e.id);openExplore(expQ.indexOf(id))});
  app.querySelector('#pgo').onclick=()=>{if(ch){plan=P.sel.slice(0,P.nc).filter(c=>c.length).map(c=>[...c]);checkin.rounds=P.rounds;checkin.minutes=P.minutes;planSrc='custom';nav('preview')}
   else{expQ=P.exp.slice();openExplore(0)}};
@@ -571,7 +741,8 @@ function vExplore(){const id=expQ[expI],e=byId[id];if(!e)return nav('pick');cons
   <span class="mut">${expQ.length>1?`${expI+1} of ${expQ.length}`:''}</span>
   <span class="row" style="gap:6px"><button class="ib" id="xprev" aria-label="Previous exercise" ${expI?'':'disabled'}>${ICON.left}</button><button class="ib" id="xnext" aria-label="Next exercise" ${expI<expQ.length-1?'':'disabled'}>${ICON.right}</button></span></div>
  <h2>${e.n}</h2><div class="desc" style="font-size:15px">${e.desc}</div>
- <div style="margin:6px 0"><span class="tag">${ROLE[e.role]}</span><span class="tag">${EQN[e.eq]}${e.anim.bench?' + bench':''}</span><span class="tag">${e.reps[0]}–${e.reps[1]}${e.unit==='s'?' s':' reps'+(e.unit==='/side'?' / side':'')}</span></div>
+ <div style="margin:6px 0"><span class="tag">${ROLE[e.role]}</span><span class="tag">${e.req.map(k=>EQL[k]).join(' + ')||'Bodyweight'}</span><span class="tag">${e.reps[0]}–${e.reps[1]}${e.unit==='s'?' s':' reps'+(e.unit==='/side'?' / side':'')}</span></div>
+ ${holdBox(e)}
  <div class="big xfig"><svg class="fig" data-ex="${id}" data-clk="x" viewBox="-10 -16 120 114" role="img" aria-label="${e.n} movement"></svg></div>
  <div class="xstep" data-curstep data-ex="${id}" data-clk="x" aria-live="polite"></div>
  <div class="xctl"><button class="ib" id="xsb" aria-label="Previous step">${ICON.rew}</button><button class="ib big1" id="xpp" aria-label="${c.p?'Play':'Pause'}">${c.p?ICON.play:ICON.pause}</button><button class="ib" id="xsf" aria-label="Next step">${ICON.fwd}</button>
@@ -604,18 +775,20 @@ function vExploreKeep(){const y=window.scrollY;vExplore();window.scrollTo(0,y)}
 // ---------- preview ----------
 let plan=null,planSrc='auto';
 function vPreview(){const REC=recTimes(plan,checkin.rounds,checkin.minutes);const T={};plan.flat().forEach(id=>T[id]=suggestStart(id));
- app.innerHTML=`<h2>Today's workout</h2><div class="mut">${today()} · ${plan.length} circuit${plan.length>1?'s':''} · ${checkin.rounds} rounds each · ~${checkin.minutes} min</div>
- ${plan.map((c,ci)=>`<h3>Circuit ${LET(ci)}</h3>${c.map((id,i)=>{const e=byId[id],s=T[id],L=stepList(e.eq);return`<div class="card ex">${svg(id,96)}<div style="flex:1"><b>${e.n}</b><div class="desc">${e.desc}</div><div class="mut">${L?s.w+' lb · ':''}${s.reps}${e.unit||''} target · ${e.reps[0]}–${e.reps[1]}${e.unit||''} · ~${mmss(REC[id])}/set</div><div>${e.work.map(w=>`<span class="tag">${w}</span>`).join('')}</div><button class="chip" style="margin-top:6px" data-swap="${ci},${i}">Swap</button></div></div>`}).join('')}`).join('')}
+ app.innerHTML=`<h2>Today's workout</h2><div class="mut">${today()} · ${esc(curLoc().name)} · ${plan.length} circuit${plan.length>1?'s':''} · ${checkin.rounds} rounds each · ~${checkin.minutes} min</div>
+ ${planSrc==='auto'&&RELAX.length?`<div class="card note">Few options left at this location, so these repeat recent sessions: ${RELAX.join(', ')}.</div>`:''}
+ ${plan.map((c,ci)=>`<h3>Circuit ${LET(ci)}</h3>${c.map((id,i)=>{const e=byId[id],s=T[id],L=stepList(e.eq);return`<div class="card ex">${svg(id,96)}<div style="flex:1"><b>${e.n}</b><div class="desc">${e.desc}</div><div class="mini">${e.hold} ${e.sides}</div><div class="mut">${L?s.w+' lb · ':''}${s.reps}${e.unit||''} target · ${e.reps[0]}–${e.reps[1]}${e.unit||''} · ~${mmss(REC[id])}/set</div><div>${e.work.map(w=>`<span class="tag">${w}</span>`).join('')}</div><button class="chip" style="margin-top:6px" data-swap="${ci},${i}">Swap</button></div></div>`}).join('')}`).join('')}
  ${setupCard(plan,T)}
  <div class="mut">Warm-up first: 5 min — cat-cow, world's greatest stretch, band pull-aparts, bodyweight squats.</div>
  <button class="btn" id="start">Start workout</button>${planSrc==='custom'?'<button class="btn sec" id="edit">Edit my selection</button>':'<button class="btn sec" id="re">Regenerate</button>'}`;
  app.querySelectorAll('[data-swap]').forEach(b=>b.onclick=()=>{const[ci,i]=b.dataset.swap.split(',').map(Number);const cur=byId[plan[ci][i]];const used=new Set(plan.flat());
-  const alts=EX.filter(e=>!used.has(e.id)&&(planSrc==='custom'||score(e)>-100)).sort((a,b)=>(b.role===cur.role)-(a.role===cur.role));if(alts[0]){plan[ci][i]=alts[0].id;vPreview()}});
+  const fam=new Set(plan.flat().filter(x=>x!==cur.id).map(x=>byId[x].fam)),sc={};EX.forEach(e=>sc[e.id]=score(e));
+  const alts=EX.filter(e=>!used.has(e.id)&&hasEq(e)&&sc[e.id]>-500).sort((a,b)=>((b.role===cur.role)*100-(fam.has(b.fam)?50:0)+sc[b.id])-((a.role===cur.role)*100-(fam.has(a.fam)?50:0)+sc[a.id]));if(alts[0]){plan[ci][i]=alts[0].id;vPreview()}});
  const re=app.querySelector('#re');if(re)re.onclick=()=>{plan=generate();vPreview()};
  const ed=app.querySelector('#edit');if(ed)ed.onclick=()=>nav('pick');
  app.querySelector('#start').onclick=()=>{const steps=[];plan.forEach((c,ci)=>{for(let r=1;r<=checkin.rounds;r++)c.forEach(id=>steps.push({ci,r,id}))});
   const targets={};plan.flat().forEach(id=>targets[id]=suggestStart(id));
-  S.current={date:new Date().toISOString(),plan,rounds:checkin.rounds,checkin:{hurt:[...checkin.hurt],sore:[...checkin.sore],work:[...checkin.work]},steps,i:0,sets:[],targets,rec:recTimes(plan,checkin.rounds,checkin.minutes),minutes:checkin.minutes,sw:{acc:0,run:0}};save();nav('work')}}
+  S.current={date:new Date().toISOString(),loc:S.loc,plan,rounds:checkin.rounds,checkin:{hurt:[...checkin.hurt],sore:[...checkin.sore],work:[...checkin.work]},steps,i:0,sets:[],targets,rec:recTimes(plan,checkin.rounds,checkin.minutes),minutes:checkin.minutes,sw:{acc:0,run:0}};save();nav('work')}}
 
 // ---------- full workout sheet (any time during a workout) ----------
 function showPlan(){const C=S.current;if(!C)return;closeSheet();const logged=new Set(C.sets.map(x=>x.si));const cur=C.steps[C.i];
@@ -645,12 +818,12 @@ function vWork(){const C=S.current;if(!C)return nav('start');if(C.i>=C.steps.len
  const rec=C.rec[st.id]||120,last=!nxt||nxt.r!==st.r||nxt.ci!==st.ci;let rate=redo?C.redo.rate||null:null;
  app.innerHTML=`<div class="prog"><i style="width:${pct}%"></i></div>
  <div class="row" style="justify-content:space-between;margin-top:8px;gap:8px"><span class="mut">Circuit ${LET(st.ci)} · Round ${st.r}/${C.rounds} · Set ${C.i+1}/${C.steps.length}</span><button class="pill" id="plan">${ICON.list}<span>Full workout</span></button></div>
- <h2>${e.n}</h2><div class="desc">${e.desc}</div><div class="big">${svg(st.id,300)}</div>
+ <h2>${e.n}</h2><div class="desc">${e.desc}</div>${holdBox(e)}<div class="big">${svg(st.id,300)}</div>
  <div class="legend mut"><span style="color:#ff6b6b">&#9679; Red = working muscles</span></div>
  <div class="card"><div class="mut">${t.note||''}</div>
-  <div class="row" style="margin-top:10px;justify-content:space-around">
-   ${L?`<label class="mut">Weight (lb)<br><input type="number" id="w" value="${t.w}" step="5" inputmode="decimal"></label>`:`<div class="mut">${e.eq==='bar'?'Bodyweight / band assist':e.eq==='band'?'Band':'Bodyweight'}</div>`}
-   <label class="mut">${e.unit==='s'?'Seconds':'Reps'+(e.unit||'')}<br><input type="number" id="reps" value="${t.reps}" inputmode="numeric"></label></div>
+  <div class="row" style="margin-top:10px;justify-content:space-around;flex-wrap:wrap;row-gap:12px">
+   ${L?`<div class="numf"><span class="mut">${wLabel(e.eq)}</span><div class="stepper"><button data-st="w" data-d="-1" aria-label="Lighter">−</button><input type="number" id="w" value="${t.w}" inputmode="decimal" aria-label="${wLabel(e.eq)}"><button data-st="w" data-d="1" aria-label="Heavier">+</button></div>${e.eq==='bb'?`<small class="mut" id="pm">${plateMath(t.w,curLoc().bar)}</small>`:''}</div>`:`<div class="mut">${e.eq==='bar'?'Bodyweight / band assist':e.eq==='band'?'Band':e.eq==='trx'?'Bodyweight on the TRX':'Bodyweight'}</div>`}
+   <div class="numf"><span class="mut">${e.unit==='s'?'Seconds':'Reps'}${e.unit==='/side'||(e.unit==='s'&&e.sides.includes('switch'))?' per side':''}</span><div class="stepper"><button data-st="reps" data-d="-1" aria-label="Fewer">−</button><input type="number" id="reps" value="${t.reps}" inputmode="numeric" aria-label="Reps"><button data-st="reps" data-d="1" aria-label="More">+</button></div></div></div>
   <div class="mut" style="margin-top:12px;text-align:center">How did that set feel? <small>(optional — you can rate later)</small></div>
   <div class="rate"><button class="e ${rate==='easy'?'sel':''}" data-r="easy">Easy<br><small>3+ left</small></button><button class="r ${rate==='right'?'sel':''}" data-r="right">Right<br><small>1–2 left</small></button><button class="h ${rate==='hard'?'sel':''}" data-r="hard">Hard<br><small>form broke</small></button></div></div>
  <div class="card"><b>Movement steps</b>${stepsList(st.id)}</div>
@@ -664,6 +837,11 @@ function vWork(){const C=S.current;if(!C)return nav('start');if(C.i>=C.steps.len
  </div></div>`;
  dockPad();
  app.querySelector('#plan').onclick=showPlan;
+ const rstep=e.unit==='s'?5:e.reps[0]<=4?1:2;
+ app.querySelectorAll('[data-st]').forEach(b=>b.onclick=()=>{const d=+b.dataset.d,inp=app.querySelector('#'+b.dataset.st);let v=+inp.value||0;
+  if(b.dataset.st==='w'){const i=L.indexOf(nearest(L,v));let j=i;if(L[i]===v||(d>0?L[i]<v:L[i]>v))j=i+d;v=L[Math.max(0,Math.min(L.length-1,j))]}else v=Math.max(1,v+d*rstep);
+  inp.value=v;const pm=app.querySelector('#pm');if(pm&&b.dataset.st==='w')pm.textContent=plateMath(v,curLoc().bar)});
+ const wi=app.querySelector('#w');if(wi&&e.eq==='bb')wi.oninput=()=>{app.querySelector('#pm').textContent=plateMath(+wi.value||0,curLoc().bar)};
  app.querySelectorAll('.rate button[data-r]').forEach(b=>b.onclick=()=>{rate=rate===b.dataset.r?null:b.dataset.r;app.querySelectorAll('.rate button[data-r]').forEach(x=>x.classList.toggle('sel',x.dataset.r===rate))});
  const sw=C.sw,upd=()=>{const el=swEl(sw),T=app.querySelector('#swt');if(!T)return clearInterval(timerInt);T.textContent=mmss(el);const over=el>rec;T.classList.toggle('over',over);
   app.querySelector('#swo').innerHTML=over?`<span style="color:#ff6b6b">${mmss(el-rec)} over</span>`:(sw.run?`<span style="color:#7bd88f">${mmss(rec-el)} remaining</span>`:(el?'<span class="mut">Paused</span>':'<span class="mut">Tap Start when you begin</span>'));
@@ -717,23 +895,79 @@ function vHist(){const ss=[...S.sessions].reverse();
   return`<div class="card"><b>${new Date(s.date).toLocaleDateString(undefined,{weekday:'short',month:'short',day:'numeric',year:'numeric'})}</b>
   ${s.checkin.hurt.length?`<div class="mut">Avoided: ${s.checkin.hurt.join(', ')}</div>`:''}${s.checkin.work.length?`<div class="mut">Focus: ${s.checkin.work.join(', ')}</div>`:''}
   <table>${Object.entries(g).map(([id,xs])=>`<tr><td>${byId[id]?.n||id}</td><td style="text-align:right">${xs.map(x=>(x.w?x.w+'×':'')+x.reps).join(', ')}</td></tr>`).join('')}</table></div>`}).join('')}`}
-function vSet(){const st=S.settings;
+function vSet(){const st=S.settings;const le=S.lastExport?new Date(S.lastExport).toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric'}):null;
  app.innerHTML=`<h2>Settings</h2>
  <h3>Ideal workout length</h3><div class="seg" id="ideal">${[45,60,75,90].map(m=>`<button data-x="${m}" class="${st.ideal==m?'on':''}">${m} min</button>`).join('')}</div>
  <div class="mut" style="margin-top:6px">Today offers ${lenOpts().join(' · ')} min. 75 min and up adds a third circuit.</div>
- <h3>Dumbbells you own (lb, comma separated)</h3><input id="db" style="width:100%;padding:10px;border:1px solid var(--bd);border-radius:10px" value="${st.db.join(', ')}">
- <h3>Kettlebells you own (lb)</h3><input id="kb" style="width:100%;padding:10px;border:1px solid var(--bd);border-radius:10px" value="${st.kb.join(', ')}">
- <h3>Base rest between rounds (s)</h3><input type="number" id="rest" value="${st.rest}">
- <button class="btn" id="sv">Save settings</button>
- <h3>Backup</h3><div class="mut">Data lives only on this device. Copy this text to back up, or paste a backup and import.</div>
- <textarea id="bk" rows="5">${JSON.stringify(S)}</textarea>
- <button class="btn sec" id="cp">Copy backup</button><button class="btn sec" id="im">Import backup</button><button class="btn sec" id="rs" style="color:var(--warn);border-color:var(--warn)">Erase all data</button>`;
+ <h3>Locations</h3><div class="mut">Each location has its own equipment and weights. Workouts only use what's there.</div>
+ ${S.locs.map(l=>`<div class="card lcard"><div style="flex:1;min-width:0"><b>${esc(l.name)}</b>${l.id===S.loc?' <span class="tag">Current</span>':''}<div class="mut">${l.eq.map(k=>EQL[k]).join(' · ')||'Bodyweight only'}</div></div><button class="pill" data-edit="${l.id}">Edit</button></div>`).join('')}
+ <button class="btn sec" id="addloc">+ Add a location</button>
+ <h3>Base rest between rounds (s)</h3><div class="row"><input type="number" id="rest" value="${st.rest}" inputmode="numeric"><button class="btn sec" id="sv" style="margin:0;width:auto;padding:0 20px">Save</button></div>
+ <h3>Backup &amp; move to another device</h3>
+ <div class="mut">Your data lives only on this device. Export saves a backup file you can keep in Files, iCloud or Drive, or open on another phone or computer and import.${le?` Last export: ${le}.`:''}</div>
+ <button class="btn" id="exp">Export backup file</button>
+ <label class="btn sec" for="impf" style="cursor:pointer">Import backup file</label><input type="file" id="impf" accept=".json,application/json" hidden>
+ <button class="btn sec" id="rs" style="color:var(--warn);border-color:var(--warn)">Erase all data on this device</button>`;
  app.querySelectorAll('#ideal button').forEach(b=>b.onclick=()=>{st.ideal=+b.dataset.x;st.minutes=st.ideal;checkin.minutes=st.ideal;save();vSet()});
- const nums=v=>v.split(',').map(x=>parseFloat(x)).filter(x=>x>0).sort((a,b)=>a-b);
- app.querySelector('#sv').onclick=()=>{st.db=nums(app.querySelector('#db').value);st.kb=nums(app.querySelector('#kb').value);st.rest=+app.querySelector('#rest').value||60;save();alert('Saved')};
- app.querySelector('#cp').onclick=()=>{const t=app.querySelector('#bk');t.select();try{navigator.clipboard.writeText(t.value)}catch(e){document.execCommand('copy')}};
- app.querySelector('#im').onclick=()=>{try{S=JSON.parse(app.querySelector('#bk').value);save();alert('Imported');render()}catch(e){alert('Invalid backup')}};
- app.querySelector('#rs').onclick=()=>{if(confirm('Erase all workouts and settings?')){try{localStorage.removeItem(KEY)}catch(e){}mem=null;S=load();render()}}}
+ app.querySelector('#sv').onclick=()=>{st.rest=+app.querySelector('#rest').value||60;save();toast('Saved')};
+ app.querySelectorAll('[data-edit]').forEach(b=>b.onclick=()=>{locEd=JSON.parse(JSON.stringify(S.locs.find(l=>l.id===b.dataset.edit)));nav('loc')});
+ app.querySelector('#addloc').onclick=()=>{locEd=Object.assign(defLoc(),{id:'l'+Date.now().toString(36),name:'',eq:['db'],isNew:true});nav('loc')};
+ app.querySelector('#exp').onclick=exportData;
+ app.querySelector('#impf').onchange=ev=>{const fl=ev.target.files[0];if(!fl)return;const rd=new FileReader();rd.onload=()=>importAsk(String(rd.result));rd.readAsText(fl);ev.target.value=''};
+ app.querySelector('#rs').onclick=()=>{if(confirm('Erase all workouts, locations and settings on this device? Export a backup first if you want to keep them.')){try{localStorage.removeItem(KEY)}catch(e){}mem=null;S=migrate(load());render()}}}
+// ---------- backup file: export / import (merge or replace) ----------
+function exportData(){const name='meathead-backup-'+new Date().toISOString().slice(0,10)+'.json';S.lastExport=Date.now();save();
+ const data=JSON.stringify(Object.assign({app:'meathead',exported:new Date().toISOString()},S));const file=new File([data],name,{type:'application/json'});
+ const mobile=/Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+ if(mobile&&navigator.canShare&&navigator.canShare({files:[file]})){navigator.share({files:[file],title:'Meathead backup'}).catch(()=>{})}
+ else{const a=document.createElement('a');a.href=URL.createObjectURL(file);a.download=name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},1000)}
+ if(view==='set')vSet()}
+function importAsk(txt){let D;try{D=JSON.parse(txt)}catch(e){D=null}
+ if(!D||typeof D!=='object'||!D.settings||!Array.isArray(D.sessions))return toast('That file isn’t a Meathead backup');
+ closeSheet();const el=document.createElement('div');el.className='sheet';el.setAttribute('role','dialog');el.setAttribute('aria-modal','true');el.setAttribute('aria-label','Import backup');
+ el.innerHTML=`<div class="sh-in" style="height:auto;align-self:flex-end;border-radius:18px 18px 0 0"><h2>Import backup</h2>
+ <div class="mut">This file has ${D.sessions.length} workout${D.sessions.length==1?'':'s'}${D.exported?`, exported ${new Date(D.exported).toLocaleDateString()}`:''}. This device has ${S.sessions.length}.</div>
+ <button class="btn" id="imm">Merge with this device (recommended)</button><div class="mut" style="margin-top:6px">Keeps every workout from both, with no duplicates; keeps the most recent weights for each exercise; adds any new locations.</div>
+ <button class="btn sec" id="imr">Replace everything on this device</button><button class="btn sec" id="imx">Cancel</button></div>`;
+ document.body.appendChild(el);document.body.classList.add('noscroll');
+ el.querySelector('#imx').onclick=closeSheet;el.querySelector('#imm').onclick=()=>importData(D,'merge');el.querySelector('#imr').onclick=()=>{if(confirm('Replace all data on this device with the backup?'))importData(D,'replace')}}
+function importData(D,mode){D=migrate(JSON.parse(JSON.stringify(D)));delete D.app;delete D.exported;
+ if(mode==='replace'){S=D}
+ else{const have=new Set(S.sessions.map(x=>x.date));let added=0;D.sessions.forEach(x=>{if(!have.has(x.date)){S.sessions.push(x);added++}});S.sessions.sort((a,b)=>new Date(a.date)-new Date(b.date));
+  Object.entries(D.log||{}).forEach(([id,h])=>{const m=S.log[id];if(!h||!h.last)return;if(!m||new Date(h.last.date)>new Date(m.last.date))S.log[id]={last:h.last,best:Math.max(h.best||0,(m&&m.best)||0)};else m.best=Math.max(m.best||0,h.best||0)});
+  D.locs.forEach(l=>{if(!S.locs.some(x=>x.id===l.id))S.locs.push(l)});S._added=added}
+ const n=mode==='replace'?S.sessions.length:S._added;delete S._added;save();closeSheet();
+ toast(mode==='replace'?`Replaced: ${n} workouts loaded`:`Merged: ${n} new workout${n==1?'':'s'} added`);nav('set')}
+// ---------- location editor ----------
+let locEd=null;
+function vLoc(){const L=locEd;if(!L)return nav('set');const has=k=>L.eq.includes(k);
+ const fld=(id,label,val,hint)=>`<label class="fld"><span>${label}</span><input id="${id}" value="${esc(val)}" inputmode="decimal">${hint?`<small class="mut">${hint}</small>`:''}</label>`;
+ app.innerHTML=`<div class="xtop"><button class="pill" id="lback">${ICON.left}<span>Settings</span></button></div>
+ <h2>${L.isNew?'New location':'Edit location'}</h2>
+ <label class="fld"><span>Nickname</span><input id="lname" value="${esc(L.name)}" maxlength="24" placeholder="Home, Office gym, Hotel…" inputmode="text"></label>
+ <h3>Equipment here</h3><div class="chips" id="leq">${Object.entries(EQL).map(([k,v])=>`<button class="chip ${has(k)?'work':''}" data-k="${k}" aria-pressed="${has(k)}">${v}</button>`).join('')}</div>
+ <div class="mut" style="margin-top:6px">Bodyweight exercises are always available.</div>
+ ${has('db')||has('kb')||has('barbell')||has('cable')||has('ball')?'<h3>Weights here</h3>':''}
+ ${has('db')?fld('ldb','Dumbbells (lb, per dumbbell, comma separated)',L.db.join(', ')):''}
+ ${has('kb')?fld('lkb','Kettlebells (lb, comma separated)',L.kb.join(', ')):''}
+ ${has('barbell')?`<div class="row" style="gap:12px">${fld('lbar','Bar (lb)',L.bar)}${fld('lbbmax','Heaviest load (lb)',L.bbMax)}</div><div class="mut">Barbell loads go up 5 lb at a time (a 2.5 lb plate per side).</div>`:''}
+ ${has('cable')?`<div class="row" style="gap:12px">${fld('lcmin','Cable lightest',L.cMin)}${fld('lcmax','Heaviest',L.cMax)}${fld('lcstep','Step',L.cStep)}</div>`:''}
+ ${has('ball')?fld('lball','Slam ball (lb)',L.ball):''}
+ <button class="btn" id="lsave">Save location</button>
+ ${!L.isNew&&S.locs.length>1?'<button class="btn sec" id="ldel" style="color:var(--warn);border-color:var(--warn)">Delete location</button>':''}`;
+ const nums=v=>String(v).split(',').map(x=>parseFloat(x)).filter(x=>x>0).sort((a,b)=>a-b);
+ const grab=()=>{const g=id=>{const x=app.querySelector('#'+id);return x?x.value:null};L.name=g('lname')??L.name;
+  if(g('ldb')!==null)L.db=nums(g('ldb'));if(g('lkb')!==null)L.kb=nums(g('lkb'));
+  if(g('lbar')!==null){L.bar=+g('lbar')||45;L.bbMax=Math.max(L.bar,+g('lbbmax')||315)}
+  if(g('lcmin')!==null){L.cMin=+g('lcmin')||5;L.cStep=+g('lcstep')||5;L.cMax=Math.max(L.cMin,+g('lcmax')||150)}
+  if(g('lball')!==null)L.ball=+g('lball')||15};
+ app.querySelector('#lback').onclick=()=>nav('set');
+ app.querySelectorAll('#leq button').forEach(b=>b.onclick=()=>{grab();const k=b.dataset.k;L.eq=has(k)?L.eq.filter(x=>x!==k):[...L.eq,k];const y=window.scrollY;vLoc();window.scrollTo(0,y)});
+ app.querySelector('#lsave').onclick=()=>{grab();L.name=L.name.trim();if(!L.name)return toast('Give the location a nickname');
+  if(L.eq.includes('db')&&!L.db.length)return toast('List at least one dumbbell weight');if(L.eq.includes('kb')&&!L.kb.length)return toast('List at least one kettlebell weight');
+  const isNew=L.isNew;delete L.isNew;const i=S.locs.findIndex(x=>x.id===L.id);if(i>=0)S.locs[i]=L;else S.locs.push(L);if(isNew)S.loc=L.id;save();locEd=null;toast(isNew?`${L.name} added and selected`:'Location saved');nav('set')};
+ const d=app.querySelector('#ldel');if(d)d.onclick=()=>{if(!confirm(`Delete ${L.name}? Workout history is kept.`))return;S.locs=S.locs.filter(x=>x.id!==L.id);if(S.loc===L.id)S.loc=S.locs[0].id;save();locEd=null;nav('set')}}
+
 
 // ---------- PWA: service worker, install, wake lock, persistent storage ----------
 if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('/sw.js').catch(()=>{}))}
