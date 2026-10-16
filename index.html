@@ -125,6 +125,9 @@ body.noscroll{overflow:hidden}
 .fld{display:flex;flex-direction:column;gap:6px;margin:10px 0;flex:1;min-width:0}.fld>span{font-size:14px;color:var(--mut)}
 .fld input{width:100%;padding:12px;font-size:16px;border:1px solid var(--bd);border-radius:10px;background:#15181b;color:var(--ink)}
 label.btn{display:flex;align-items:center;justify-content:center;text-align:center}
+.uhead{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:14px}.uhead b{font-size:15px}
+.useg{display:inline-flex;border:1px solid var(--bd);border-radius:10px;overflow:hidden}.useg button{min-width:52px;min-height:40px;border:0;background:var(--card);color:var(--ink);font-size:14px;font-weight:600}.useg button.on{background:#073763;color:#CFE2F3}
+.nextc .prow{border-bottom:1px solid var(--bd)}.nextc .prow:last-of-type{border-bottom:0}.nl{font-size:14px;color:var(--acc);font-weight:600;margin-top:2px}
 </style></head><body>
 <div id="splash" role="img" aria-label="Meathead"><div class="sp-in"><svg class="splogo" aria-hidden="true" focusable="false" viewBox="6 13 88 68"><defs><filter id="sglow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="1.4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
  <g fill="#CFE2F3" fill-opacity=".26"><path d="M9.04 65.21C9.42 61.9 12.01 58.08 17.13 56.06C22.25 54.05 32.47 51.77 39.75 53.1C47.03 54.43 56.49 60.96 60.79 64.04C65.09 67.13 65.83 69.31 65.56 71.63C65.3 73.95 63.98 76.9 59.21 77.96C54.44 79.01 44.32 78.28 36.93 77.94C29.54 77.6 19.52 78.06 14.87 75.94C10.22 73.81 8.67 68.52 9.04 65.21Z"/><path d="M59.17 76.25C56.67 75.86 53.44 72.81 52.49 69.81C51.55 66.82 52.06 64.55 53.48 58.29C54.91 52.02 58.87 37.09 61.06 32.22C63.25 27.35 64.98 28.79 66.62 29.05C68.27 29.31 70.52 28.5 70.94 33.78C71.36 39.06 69.7 54.36 69.13 60.76C68.56 67.16 69.17 69.6 67.51 72.19C65.85 74.77 61.67 76.65 59.17 76.25Z"/><ellipse cx="18.98" cy="66.34" rx="8.6" ry="10" transform="rotate(6.48 18.98 66.34)" /></g>
@@ -507,15 +510,15 @@ tricepext:['One rope or bar on a high pulley, both hands.',BOTHA],
 trxrow:['Bodyweight; one TRX handle in each hand.',BOTHA]};
 EX.forEach(e=>{e.req=REQ[e.id]||[];e.fam=FAM[e.id]||e.id;const h=HS[e.id]||['',''];e.hold=h[0];e.sides=h[1]});
 // ---------- locations ----------
-function defLoc(st){return{id:'home',name:'Home',eq:Object.keys(EQL),db:(st&&st.db)||[5,10,15,20,25,30,35,40,45,50],kb:(st&&st.kb)||[18,26,35,44,53],bar:45,bbMax:315,cMin:5,cMax:150,cStep:5,ball:15}}
+function defLoc(st){return{id:'home',name:'Home',u:{db:'lb',kb:'lb',bb:'lb',cable:'lb',ball:'lb'},eq:Object.keys(EQL),db:(st&&st.db)||[5,10,15,20,25,30,35,40,45,50],kb:(st&&st.kb)||[18,26,35,44,53],bar:45,bbMax:315,cMin:5,cMax:150,cStep:5,ball:15}}
 function migrate(D){D.settings=D.settings||{};const st=D.settings;if(!st.ideal)st.ideal=60;if(!st.rest)st.rest=60;if(!st.rounds)st.rounds=3;if(!st.minutes)st.minutes=st.ideal;
- D.log=D.log||{};D.sessions=D.sessions||[];if(!Array.isArray(D.locs)||!D.locs.length){D.locs=[defLoc(st)];D.loc='home'}if(!D.locs.some(l=>l.id===D.loc))D.loc=D.locs[0].id;D.v=3;return D}
+ D.log=D.log||{};D.sessions=D.sessions||[];if(!Array.isArray(D.locs)||!D.locs.length){D.locs=[defLoc(st)];D.loc='home'}D.locs.forEach(l=>{l.u=Object.assign({db:'lb',kb:'lb',bb:'lb',cable:'lb',ball:'lb'},l.u||{})});if(!D.locs.some(l=>l.id===D.loc))D.loc=D.locs[0].id;D.v=3;return D}
 migrate(S);
 function curLoc(){const id=(S.current&&S.current.loc)||S.loc;return S.locs.find(l=>l.id===id)||S.locs[0]}
 function hasEq(e,L){L=L||curLoc();return e.req.every(k=>L.eq.includes(k))}
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-function plateMath(total,bar){let side=(total-bar)/2;if(side<0)return'';const out=[];for(const p of[45,35,25,10,5,2.5]){while(side>=p-1e-9){out.push(p);side-=p}}return out.length?out.join(' + ')+' lb per side':'Empty bar'}
-function wLabel(eq){return eq==='db'?'Weight (lb, per dumbbell)':eq==='kb'?'Kettlebell (lb)':eq==='bb'?'Total (lb, incl. bar)':eq==='cable'?'Stack (lb)':eq==='ball'?'Ball (lb)':'Weight (lb)'}
+function plateMath(total,bar,u){u=u||'lb';let side=(total-bar)/2;if(side<0)return'';const out=[];for(const p of(u==='kg'?[25,20,15,10,5,2.5,1.25]:[45,35,25,10,5,2.5])){while(side>=p-1e-9){out.push(p);side-=p}}return out.length?out.join(' + ')+' '+u+' per side':'Empty bar'}
+function wLabel(eq){const u=uOf(eq);return eq==='db'?`Weight (${u}, per dumbbell)`:eq==='kb'?`Kettlebell (${u})`:eq==='bb'?`Total (${u}, incl. bar)`:eq==='cable'?`Stack (${u})`:eq==='ball'?`Ball (${u})`:`Weight (${u})`}
 
 EX.forEach(e=>{const m=XM[e.id]||[];e.pace=m[0]||'Controlled — slow on the way down';e.mist=m[1]||[];e.breath=m[2]||'Inhale and brace before the lowering phase; exhale through the hardest part of the lift.'});
 
@@ -617,23 +620,37 @@ function generate(){RELAX=[];WK=weekUse();LAST=lastRecent();const used=new Set()
   r.forEach(role=>{let e=pick(role,used,fams);if(!e||(fams.has(e.fam)))for(const alt of FB[role]){const a=pick(alt,used,fams);if(a&&!fams.has(a.fam)){e=a;break}}if(e){used.add(e.id);fams.add(e.fam);out.push(e.id)}});return out}).filter(c=>c.length);
  RELAX=plan.flat().filter(id=>LAST.includes(id)||(WK[id]||0)>=2).map(id=>byId[id].n);WK=LAST=null;return plan}
 // ---------- progression ----------
-function stepList(eq){const L=curLoc(),r=(a,b,st)=>{const o=[];for(let w=a;w<=b+1e-9;w+=st)o.push(Math.round(w*10)/10);return o};let o=null;
- if(eq==='db')o=L.db;else if(eq==='kb')o=L.kb;else if(eq==='bb')o=r(L.bar,L.bbMax,5);else if(eq==='cable')o=r(L.cMin,L.cMax,L.cStep||5);else if(eq==='ball')o=[L.ball];
+// units: each piece of equipment at a location is lb or kg
+const UDEF={lb:{db:[5,10,15,20,25,30,35,40,45,50],kb:[18,26,35,44,53],bar:45,bbMax:315,cMin:5,cMax:150,cStep:5,ball:15},kg:{db:[2,4,6,8,10,12,14,16,18,20,22.5,25],kb:[8,12,16,20,24,28,32],bar:20,bbMax:140,cMin:2.5,cMax:70,cStep:2.5,ball:7}};
+function uOf(eq,L){L=L||curLoc();return(L.u&&L.u[eq])||'lb'}
+function conv(w,from,to){from=from||'lb';to=to||'lb';if(from===to)return w;return from==='kg'?w*2.20462:w/2.20462}
+function stepList(eq){const L=curLoc(),r=(a,b,st)=>{const o=[];for(let w=a;w<=b+1e-9;w+=st)o.push(Math.round(w*100)/100);return o};let o=null;
+ if(eq==='db')o=L.db;else if(eq==='kb')o=L.kb;else if(eq==='bb')o=r(L.bar,L.bbMax,uOf('bb',L)==='kg'?2.5:5);else if(eq==='cable')o=r(L.cMin,L.cMax,L.cStep||5);else if(eq==='ball')o=[L.ball];
  return o&&o.length?o:null}
 function nearest(list,w){return list.reduce((p,c)=>Math.abs(c-w)<Math.abs(p-w)?c:p,list[0])}
 function shift(eq,w,dir){const L=stepList(eq);if(!L)return w;const i=L.indexOf(nearest(L,w));return L[Math.max(0,Math.min(L.length-1,i+dir))]}
-function suggestStart(id){const e=byId[id],h=S.log[id],L=stepList(e.eq);
- if(!h){return {w:L?L[Math.min(1,L.length-1)]:0,reps:e.reps[0],note:'First time — pick a conservative weight and rate honestly.'}}
- let{w,reps,rate}=h.last;let note='Last time: '+(L?w+' lb × ':'')+reps+' — '+rate;
- if(rate==='easy'){if(L){w=shift(e.eq,w,1);reps=e.reps[0];note+=' → load up.'}else{reps=Math.min(reps+2,e.reps[1]+5);note+=' → more reps / slower tempo.'}}
- else if(rate==='right'){reps=Math.min(reps+1,e.reps[1]);if(L&&h.last.reps>=e.reps[1]){w=shift(e.eq,w,1);reps=e.reps[0];note+=' → top of range, load up.'}else note+=' → beat it by a rep.'}
- else{if(L){w=shift(e.eq,w,-1);note+=' → back off one step, own the form.'}else{reps=Math.max(e.reps[0],reps-2);note+=' → fewer reps, strict.'}}
- return{w:L?nearest(L,w):w,reps,note}}
-function nextSet(id,w,reps,rate){const e=byId[id],L=stepList(e.eq);
- if(rate==='easy'){if(L&&w<L[L.length-1])return{w:shift(e.eq,w,1),reps:e.reps[0],note:'Easy → up one weight.'};return{w,reps:reps+2,note:'Easy → +2 reps, 3 s lowering.'}}
- if(rate==='right')return{w,reps:Math.min(reps+1,e.reps[1]+(L?0:5)),note:'Right on → same weight, chase one more rep.'};
- if(L&&reps<=e.reps[0])return{w:shift(e.eq,w,-1),reps:e.reps[0],note:'Hard → drop one weight.'};
- return{w,reps:Math.max(e.reps[0],reps-2),note:'Hard → same weight, fewer reps, perfect form.'}}
+// reps: targets are always even; progression moves 2 at a time. Timed moves (carries) progress by weight, not time.
+const evenUp=n=>Math.ceil(n/2)*2,up2=n=>n%2?n+1:n+2,dn2=n=>n%2?n-1:n-2;
+function rng(e){if(e.unit==='s')return[e.reps[0],e.reps[1]];const hi=e.reps[1]%2?e.reps[1]-1:e.reps[1];return[Math.min(evenUp(e.reps[0]),hi),hi]}
+function suggestStart(id){const e=byId[id],h=S.log[id],L=stepList(e.eq),u=uOf(e.eq),T=e.unit==='s',[lo,hi]=rng(e);
+ if(!h){return{w:L?L[Math.min(1,L.length-1)]:0,reps:lo,u,note:'First time — pick a conservative weight and rate honestly.'}}
+ let{w,reps,rate}=h.last;const lu=h.last.u||'lb';if(L)w=nearest(L,conv(w,lu,u));
+ let note='Last time: '+(L?h.last.w+' '+lu+' × ':'')+reps+(T?' s':'')+' — '+rate;
+ if(T){reps=Math.max(lo,Math.min(reps,hi));
+  if(rate==='easy'&&L){w=shift(e.eq,w,1);note+=' → heavier, same time.'}else if(rate==='hard'&&L){w=shift(e.eq,w,-1);note+=' → lighter, same time.'}else note+=' → same weight and time.'}
+ else if(rate==='easy'){if(L){w=shift(e.eq,w,1);reps=lo;note+=' → load up.'}else{reps=Math.min(up2(reps),hi+6);note+=' → +2 reps, slower tempo.'}}
+ else if(rate==='right'){if(L&&reps>=hi){w=shift(e.eq,w,1);reps=lo;note+=' → top of range, load up.'}else{reps=Math.min(up2(reps),L?hi:hi+6);note+=' → +2 reps.'}}
+ else{if(L){w=shift(e.eq,w,-1);reps=Math.min(Math.max(lo,evenUp(reps)),hi);note+=' → back off one step, own the form.'}else{reps=Math.max(lo,dn2(reps));note+=' → 2 fewer reps, strict.'}}
+ return{w:L?nearest(L,w):w,reps,u,note}}
+function nextSet(id,w,reps,rate){const e=byId[id],L=stepList(e.eq),u=uOf(e.eq),T=e.unit==='s',[lo,hi]=rng(e),top=L&&w>=L[L.length-1];
+ if(T){if(rate==='easy'&&L&&!top)return{w:shift(e.eq,w,1),reps,u,note:'Easy → heavier, same time.'};if(rate==='hard'&&L)return{w:shift(e.eq,w,-1),reps,u,note:'Hard → lighter, same time.'};return{w,reps,u,note:rate==='easy'?'Easy → heaviest weight here; keep the time.':'Same weight, same time.'}}
+ if(rate==='easy'){if(L&&!top)return{w:shift(e.eq,w,1),reps:lo,u,note:'Easy → up one weight.'};return{w,reps:up2(reps),u,note:'Easy → +2 reps, 3 s lowering.'}}
+ if(rate==='right'){if(L&&!top&&reps>=hi)return{w:shift(e.eq,w,1),reps:lo,u,note:'Top of range → up one weight.'};return{w,reps:Math.min(up2(reps),L?hi:hi+6),u,note:'Right on → same weight, +2 reps.'}}
+ if(L&&reps<=lo)return{w:shift(e.eq,w,-1),reps:lo,u,note:'Hard → drop one weight.'};
+ return{w,reps:Math.max(lo,dn2(reps)),u,note:'Hard → same weight, 2 fewer reps, perfect form.'}}
+function repTxt(e,r){return r+(e.unit==='s'?' s':e.unit==='/side'?' reps per side':' reps')}
+function loadTxt(e,t){if(!stepList(e.eq)||!t||!t.w)return e.eq==='trx'?'Bodyweight (TRX)':e.eq==='band'?'Band':'Bodyweight';const U=uOf(e.eq),L=curLoc();
+ return e.eq==='db'?(/^Two/.test(e.hold)?'2 × '+t.w+' '+U+' dumbbells':t.w+' '+U+' dumbbell'):e.eq==='kb'?t.w+' '+U+' kettlebell':e.eq==='bb'?t.w+' '+U+' barbell ('+plateMath(t.w,L.bar,U)+')':e.eq==='cable'?t.w+' '+U+' on the stack':t.w+' '+U+' ball'}
 // ---------- views ----------
 const app=document.getElementById('app');let view='start';
 const LET=i=>'ABCD'[i]||String(i+1);
@@ -660,7 +677,7 @@ function rateBtns(k,cur){return`<div class="rmini" data-k="${k}">${[['easy','Eas
 function wireRate(root,onRate){root.querySelectorAll('.rmini').forEach(g=>g.querySelectorAll('button').forEach(b=>b.onclick=()=>{onRate(+g.dataset.k,b.dataset.r);g.querySelectorAll('button').forEach(x=>x.classList.toggle('sel',x===b))}))}
 function holdBox(e){return`<div class="hold"><div><b>Load</b><span>${e.hold}</span></div><div><b>Sides</b><span>${e.sides}</span></div></div>`}
 function setupCard(plan,targets){const eq=new Set();plan.flat().forEach(id=>byId[id].req.forEach(k=>eq.add(k)));const L=curLoc();
- const wts=plan.flat().map(id=>{const e=byId[id],t=targets[id];if(!stepList(e.eq)||!t)return'';const what=e.eq==='db'?(/^Two/.test(e.hold)?'2 × '+t.w+' lb dumbbells':t.w+' lb dumbbell'):e.eq==='kb'?t.w+' lb kettlebell':e.eq==='bb'?t.w+' lb barbell ('+plateMath(t.w,L.bar)+')':e.eq==='cable'?t.w+' lb on the stack':t.w+' lb ball';return`<li><b>${what}</b> — ${e.n}</li>`}).join('');
+ const wts=plan.flat().map(id=>{const e=byId[id],t=targets[id];if(!stepList(e.eq)||!t)return'';return`<li><b>${loadTxt(e,t)}</b> — ${e.n}</li>`}).join('');
  return`<div class="card"><b>Set up at ${esc(L.name)}</b><div class="mut">${[...eq].map(k=>EQL[k]).join(' · ')||'Bodyweight only'}</div>${wts?`<ul class="setup">${wts}</ul>`:''}</div>`}
 
 let mode='hurt';
@@ -756,7 +773,7 @@ function vExplore(){const id=expQ[expI],e=byId[id];if(!e)return nav('pick');cons
   ${e.stress.length?`<div style="margin-top:6px"><span class="mut">Joints to watch:</span> ${e.stress.map(x=>`<span class="tag warn">${x}</span>`).join('')}</div>`:''}</div>
  <div class="card prose"><b>Form</b><p>${e.cue}</p><b>Range &amp; stretch</b><p>${e.stretch}</p><b>Breathing</b><p>${e.breath}</p></div>
  ${e.mist.length?`<div class="card prose"><b>Common mistakes</b><ul>${e.mist.map(m=>`<li>${m}</li>`).join('')}</ul></div>`:''}
- <div class="card prose"><b>Your starting point</b><p>${L?sg.w+' lb · ':''}${sg.reps}${e.unit||''} target. ${sg.note}</p></div>
+ <div class="card prose"><b>Your starting point</b><p>${L?sg.w+' '+uOf(e.eq)+' · ':''}${repTxt(e,sg.reps)} target. ${sg.note}</p></div>
  <div class="dock"><div class="dk">${pk&&pk.mode==='choose'?`<button class="btn ${w>=0?'sec':''}" id="xadd">${w>=0?`Remove from Circuit ${LET(w)}`:`Add to Circuit ${LET(pk.act)}`}</button>`:`<button class="btn sec" id="xadd">Back to list</button>`}</div></div>`;
  app.querySelector('#xback').onclick=()=>nav('pick');
  app.querySelector('#xprev').onclick=()=>openExplore(expI-1);app.querySelector('#xnext').onclick=()=>openExplore(expI+1);
@@ -777,7 +794,7 @@ let plan=null,planSrc='auto';
 function vPreview(){const REC=recTimes(plan,checkin.rounds,checkin.minutes);const T={};plan.flat().forEach(id=>T[id]=suggestStart(id));
  app.innerHTML=`<h2>Today's workout</h2><div class="mut">${today()} · ${esc(curLoc().name)} · ${plan.length} circuit${plan.length>1?'s':''} · ${checkin.rounds} rounds each · ~${checkin.minutes} min</div>
  ${planSrc==='auto'&&RELAX.length?`<div class="card note">Few options left at this location, so these repeat recent sessions: ${RELAX.join(', ')}.</div>`:''}
- ${plan.map((c,ci)=>`<h3>Circuit ${LET(ci)}</h3>${c.map((id,i)=>{const e=byId[id],s=T[id],L=stepList(e.eq);return`<div class="card ex">${svg(id,96)}<div style="flex:1"><b>${e.n}</b><div class="desc">${e.desc}</div><div class="mini">${e.hold} ${e.sides}</div><div class="mut">${L?s.w+' lb · ':''}${s.reps}${e.unit||''} target · ${e.reps[0]}–${e.reps[1]}${e.unit||''} · ~${mmss(REC[id])}/set</div><div>${e.work.map(w=>`<span class="tag">${w}</span>`).join('')}</div><button class="chip" style="margin-top:6px" data-swap="${ci},${i}">Swap</button></div></div>`}).join('')}`).join('')}
+ ${plan.map((c,ci)=>`<h3>Circuit ${LET(ci)}</h3>${c.map((id,i)=>{const e=byId[id],s=T[id],L=stepList(e.eq);return`<div class="card ex">${svg(id,96)}<div style="flex:1"><b>${e.n}</b><div class="desc">${e.desc}</div><div class="mini">${e.hold} ${e.sides}</div><div class="mut">${L?s.w+' '+uOf(e.eq)+' · ':''}${s.reps}${e.unit||''} target · ${e.reps[0]}–${e.reps[1]}${e.unit||''} · ~${mmss(REC[id])}/set</div><div>${e.work.map(w=>`<span class="tag">${w}</span>`).join('')}</div><button class="chip" style="margin-top:6px" data-swap="${ci},${i}">Swap</button></div></div>`}).join('')}`).join('')}
  ${setupCard(plan,T)}
  <div class="mut">Warm-up first: 5 min — cat-cow, world's greatest stretch, band pull-aparts, bodyweight squats.</div>
  <button class="btn" id="start">Start workout</button>${planSrc==='custom'?'<button class="btn sec" id="edit">Edit my selection</button>':'<button class="btn sec" id="re">Regenerate</button>'}`;
@@ -799,7 +816,7 @@ function showPlan(){const C=S.current;if(!C)return;closeSheet();const logged=new
   <div class="legend mut" style="margin-top:6px"><span><i class="dot d"></i> done</span><span><i class="dot c"></i> now</span><span><i class="dot"></i> to come</span></div>
   ${C.plan.map((c,ci)=>`<h3>Circuit ${LET(ci)}</h3>${c.map(id=>{const e=byId[id],t=C.targets[id]||{},L=stepList(e.eq);
    const dots=Array.from({length:C.rounds},(_,r)=>{const si=C.steps.findIndex(s=>s.ci===ci&&s.r===r+1&&s.id===id);return`<i class="dot ${si<C.i?(logged.has(si)?'d':'s'):si===C.i?'c':''}" title="Round ${r+1}"></i>`}).join('');
-   return`<div class="prow ${cur&&cur.id===id&&cur.ci===ci?'now':''}">${svg(id,56)}<div style="flex:1;min-width:0"><b>${e.n}</b><div class="mut">${L&&t.w?t.w+' lb · ':''}${t.reps||''}${e.unit||''} · ~${mmss(C.rec[id]||0)}/set</div></div><div class="dots">${dots}</div></div>`}).join('')}`).join('')}
+   return`<div class="prow ${cur&&cur.id===id&&cur.ci===ci?'now':''}">${svg(id,56)}<div style="flex:1;min-width:0"><b>${e.n}</b><div class="mut">${L&&t.w?t.w+' '+uOf(e.eq)+' · ':''}${t.reps||''}${e.unit||''} · ~${mmss(C.rec[id]||0)}/set</div></div><div class="dots">${dots}</div></div>`}).join('')}`).join('')}
   ${setupCard(C.plan,C.targets)}<button class="btn" id="shx2">Back to workout</button></div>`;
  document.body.appendChild(el);document.body.classList.add('noscroll');
  el.querySelector('#shx').onclick=el.querySelector('#shx2').onclick=closeSheet;el.onclick=ev=>{if(ev.target===el)closeSheet()};el.querySelector('#shx').focus()}
@@ -822,7 +839,7 @@ function vWork(){const C=S.current;if(!C)return nav('start');if(C.i>=C.steps.len
  <div class="legend mut"><span style="color:#ff6b6b">&#9679; Red = working muscles</span></div>
  <div class="card"><div class="mut">${t.note||''}</div>
   <div class="row" style="margin-top:10px;justify-content:space-around;flex-wrap:wrap;row-gap:12px">
-   ${L?`<div class="numf"><span class="mut">${wLabel(e.eq)}</span><div class="stepper"><button data-st="w" data-d="-1" aria-label="Lighter">−</button><input type="number" id="w" value="${t.w}" inputmode="decimal" aria-label="${wLabel(e.eq)}"><button data-st="w" data-d="1" aria-label="Heavier">+</button></div>${e.eq==='bb'?`<small class="mut" id="pm">${plateMath(t.w,curLoc().bar)}</small>`:''}</div>`:`<div class="mut">${e.eq==='bar'?'Bodyweight / band assist':e.eq==='band'?'Band':e.eq==='trx'?'Bodyweight on the TRX':'Bodyweight'}</div>`}
+   ${L?`<div class="numf"><span class="mut">${wLabel(e.eq)}</span><div class="stepper"><button data-st="w" data-d="-1" aria-label="Lighter">−</button><input type="number" id="w" value="${t.w}" inputmode="decimal" aria-label="${wLabel(e.eq)}"><button data-st="w" data-d="1" aria-label="Heavier">+</button></div>${e.eq==='bb'?`<small class="mut" id="pm">${plateMath(t.w,curLoc().bar,uOf('bb'))}</small>`:''}</div>`:`<div class="mut">${e.eq==='bar'?'Bodyweight / band assist':e.eq==='band'?'Band':e.eq==='trx'?'Bodyweight on the TRX':'Bodyweight'}</div>`}
    <div class="numf"><span class="mut">${e.unit==='s'?'Seconds':'Reps'}${e.unit==='/side'||(e.unit==='s'&&e.sides.includes('switch'))?' per side':''}</span><div class="stepper"><button data-st="reps" data-d="-1" aria-label="Fewer">−</button><input type="number" id="reps" value="${t.reps}" inputmode="numeric" aria-label="Reps"><button data-st="reps" data-d="1" aria-label="More">+</button></div></div></div>
   <div class="mut" style="margin-top:12px;text-align:center">How did that set feel? <small>(optional — you can rate later)</small></div>
   <div class="rate"><button class="e ${rate==='easy'?'sel':''}" data-r="easy">Easy<br><small>3+ left</small></button><button class="r ${rate==='right'?'sel':''}" data-r="right">Right<br><small>1–2 left</small></button><button class="h ${rate==='hard'?'sel':''}" data-r="hard">Hard<br><small>form broke</small></button></div></div>
@@ -837,11 +854,11 @@ function vWork(){const C=S.current;if(!C)return nav('start');if(C.i>=C.steps.len
  </div></div>`;
  dockPad();
  app.querySelector('#plan').onclick=showPlan;
- const rstep=e.unit==='s'?5:e.reps[0]<=4?1:2;
+ const rstep=e.unit==='s'?5:1;
  app.querySelectorAll('[data-st]').forEach(b=>b.onclick=()=>{const d=+b.dataset.d,inp=app.querySelector('#'+b.dataset.st);let v=+inp.value||0;
   if(b.dataset.st==='w'){const i=L.indexOf(nearest(L,v));let j=i;if(L[i]===v||(d>0?L[i]<v:L[i]>v))j=i+d;v=L[Math.max(0,Math.min(L.length-1,j))]}else v=Math.max(1,v+d*rstep);
-  inp.value=v;const pm=app.querySelector('#pm');if(pm&&b.dataset.st==='w')pm.textContent=plateMath(v,curLoc().bar)});
- const wi=app.querySelector('#w');if(wi&&e.eq==='bb')wi.oninput=()=>{app.querySelector('#pm').textContent=plateMath(+wi.value||0,curLoc().bar)};
+  inp.value=v;const pm=app.querySelector('#pm');if(pm&&b.dataset.st==='w')pm.textContent=plateMath(v,curLoc().bar,uOf('bb'))});
+ const wi=app.querySelector('#w');if(wi&&e.eq==='bb')wi.oninput=()=>{app.querySelector('#pm').textContent=plateMath(+wi.value||0,curLoc().bar,uOf('bb'))};
  app.querySelectorAll('.rate button[data-r]').forEach(b=>b.onclick=()=>{rate=rate===b.dataset.r?null:b.dataset.r;app.querySelectorAll('.rate button[data-r]').forEach(x=>x.classList.toggle('sel',x.dataset.r===rate))});
  const sw=C.sw,upd=()=>{const el=swEl(sw),T=app.querySelector('#swt');if(!T)return clearInterval(timerInt);T.textContent=mmss(el);const over=el>rec;T.classList.toggle('over',over);
   app.querySelector('#swo').innerHTML=over?`<span style="color:#ff6b6b">${mmss(el-rec)} over</span>`:(sw.run?`<span style="color:#7bd88f">${mmss(rec-el)} remaining</span>`:(el?'<span class="mut">Paused</span>':'<span class="mut">Tap Start when you begin</span>'));
@@ -855,8 +872,8 @@ function vWork(){const C=S.current;if(!C)return nav('start');if(C.i>=C.steps.len
    C.redo={si:pi,w:x.w,reps:x.reps,rate:x.rated?x.rate:null,note:'Back on this set — your logged numbers are restored. Adjust and Continue.'}}
   C.i=pi;C.sw={acc,run:0};save();clearInterval(timerInt);vWork();window.scrollTo(0,0)};
  app.querySelector('#swCont').onclick=()=>{const w=L?+app.querySelector('#w').value:0,reps=+app.querySelector('#reps').value,r=rate||'right',secs=Math.round(swEl(sw));
-  C.sets.push({si:C.i,id:st.id,ci:st.ci,r:st.r,w,reps,rate:r,rated:!!rate,secs,rec,prev:{t:C.targets[st.id],log:S.log[st.id]||null}});C.targets[st.id]=nextSet(st.id,w,reps,r);
-  S.log[st.id]={last:{w,reps,rate:r,date:C.date},best:Math.max((S.log[st.id]||{}).best||0,w)};
+  C.sets.push({si:C.i,id:st.id,ci:st.ci,r:st.r,w,u:uOf(e.eq),reps,rate:r,rated:!!rate,secs,rec,prev:{t:C.targets[st.id],log:S.log[st.id]||null}});C.targets[st.id]=nextSet(st.id,w,reps,r);
+  S.log[st.id]={last:{w,u:uOf(e.eq),reps,rate:r,date:C.date},best:Math.max((S.log[st.id]||{}).best||0,w)};
   C.i++;C.redo=null;C.sw={acc:0,run:last?0:Date.now()};save();clearInterval(timerInt);window.scrollTo(0,0);
   if(last)summary(st);else vWork()};
  clearInterval(timerInt);timerInt=setInterval(upd,250);upd();
@@ -865,32 +882,36 @@ function vWork(){const C=S.current;if(!C)return nav('start');if(C.i>=C.steps.len
 function rerate(C,k,r){const x=C.sets[k];if(!x)return;x.rate=r;x.rated=true;
  if(C.sets.map(s=>s.id).lastIndexOf(x.id)===k)C.targets[x.id]=nextSet(x.id,x.w,x.reps,r);
  if(S.log[x.id]&&S.log[x.id].last.date===C.date)S.log[x.id].last.rate=r;save()}
+function nextBlock(C,st,nx){const ids=C.steps.filter(x=>x.ci===nx.ci&&x.r===nx.r).map(x=>x.id),newC=nx.ci!==st.ci;
+ return`<div class="card nextc"><div class="mut">${newC?'Up next':'Next round'}</div><h3 style="margin:2px 0 8px">${newC?`Circuit ${LET(nx.ci)} · ${C.rounds} rounds`:`Circuit ${LET(nx.ci)} · Round ${nx.r} of ${C.rounds}`}</h3>
+ ${ids.map((id,i)=>{const e=byId[id],t=C.targets[id]||{};return`<div class="prow">${svg(id,56)}<div style="flex:1;min-width:0"><b>${i+1}. ${e.n}</b><div class="nl">${loadTxt(e,t)} · ${repTxt(e,t.reps)}</div><div class="mini">${e.hold} ${e.sides}</div></div></div>`}).join('')}
+ ${newC?`<div class="mut" style="margin-top:10px">Set up: ${[...new Set(ids.flatMap(id=>byId[id].req))].map(k=>EQL[k]).join(' · ')||'Bodyweight only'}</div>`:''}</div>`}
 function summary(st){const C=S.current;clearInterval(timerInt);const idx=C.sets.map((x,k)=>k).filter(k=>C.sets[k].ci===st.ci&&C.sets[k].r===st.r);
  const done=C.i>=C.steps.length,nx=done?null:C.steps[C.i],tot=idx.reduce((a,k)=>a+(C.sets[k].secs||0),0),rt=idx.reduce((a,k)=>a+(C.sets[k].rec||0),0);
  const ws=C.sets.reduce((a,x)=>a+(x.secs||0),0),wr=C.sets.reduce((a,x)=>a+(x.rec||0),0);let rs=Date.now();
  app.innerHTML=`<div class="row" style="justify-content:space-between;gap:8px"><h2>Circuit ${LET(st.ci)} · Round ${st.r}/${C.rounds} done</h2><button class="pill" id="plan">${ICON.list}<span>Full workout</span></button></div>
  <div class="card"><b>Rate each exercise</b><div class="mut">Optional. Adjusts your next set and next session. Blank = not rated (counted as Right).</div>
- ${idx.map(k=>{const x=C.sets[k];return`<div class="rrow"><span>${byId[x.id].n}<br><small class="mut">${x.w?x.w+' lb · ':''}${x.reps} · <span style="color:${x.secs>x.rec?'#ff6b6b':'var(--acc)'}">${mmss(x.secs)}</span> / ${mmss(x.rec)}</small></span>${rateBtns(k,x.rated?x.rate:null)}</div>`}).join('')||'<div class="mut">No sets logged</div>'}
+ ${idx.map(k=>{const x=C.sets[k];return`<div class="rrow"><span>${byId[x.id].n}<br><small class="mut">${x.w?x.w+' '+(x.u||'lb')+' · ':''}${x.reps} · <span style="color:${x.secs>x.rec?'#ff6b6b':'var(--acc)'}">${mmss(x.secs)}</span> / ${mmss(x.rec)}</small></span>${rateBtns(k,x.rated?x.rate:null)}</div>`}).join('')||'<div class="mut">No sets logged</div>'}
  <div class="row" style="justify-content:space-between;border-top:1px solid var(--bd);margin-top:6px;padding-top:8px"><b>Round</b><b style="color:${tot>rt?'#ff6b6b':'var(--acc)'}">${mmss(tot)} / ${mmss(rt)}${tot>rt?' · '+mmss(tot-rt)+' over':''}</b></div>
  <div class="row mut" style="justify-content:space-between"><span>Workout so far</span><span>${mmss(ws)} / ${mmss(wr)}</span></div></div>
  <div class="card"><div class="mut">Rest (untimed — take what you need)</div><div class="timer" id="rt">0:00</div><div class="mut" style="text-align:center">Light mobility: hip openers, thoracic rotations.</div></div>
- ${nx?`<div class="card ex">${svg(nx.id,96)}<div><div class="mut">Up next${nx.ci!==st.ci?` · Circuit ${LET(nx.ci)} begins`:' · Round '+nx.r}</div><b>${byId[nx.id].n}</b></div></div>`:''}
+ ${nx?nextBlock(C,st,nx):''}
  <div class="dock"><div class="dk"><button class="cb cont" id="go"><span>${nx?'Continue':'Finish workout'}</span>${ICON.fwd}</button></div></div>`;
  dockPad();
  app.querySelector('#plan').onclick=showPlan;wireRate(app,(k,r)=>rerate(C,k,r));
  timerInt=setInterval(()=>{const t=app.querySelector('#rt');if(!t)return clearInterval(timerInt);t.textContent=mmss((Date.now()-rs)/1000)},500);
  app.querySelector('#go').onclick=()=>{clearInterval(timerInt);if(!nx)return finish();C.sw={acc:0,run:Date.now()};save();vWork();window.scrollTo(0,0)}}
 function finish(){const C=S.current;if(C&&C.sets.length){S.sessions.push({date:C.date,checkin:C.checkin,exercises:C.plan.flat(),sets:C.sets.map(({prev,...x})=>x)})}S.current=null;save();closeSheet();view='done';render();window.scrollTo(0,0)}
-function vDone(){const s=S.sessions[S.sessions.length-1];if(!s)return nav('start');const vol=s.sets.reduce((a,x)=>a+x.w*x.reps,0);const ids=[...new Set(s.sets.map(x=>x.id))];
- app.innerHTML=`<h2>Workout logged</h2><div class="mut">${new Date(s.date).toLocaleString()}</div><div class="card">${s.sets.length} sets · ${vol.toLocaleString()} lb total volume</div>
+function vDone(){const s=S.sessions[S.sessions.length-1];if(!s)return nav('start');const vu=s.sets.some(x=>x.w)&&s.sets.filter(x=>x.w).every(x=>x.u==='kg')?'kg':'lb',vol=Math.round(s.sets.reduce((a,x)=>a+conv(x.w||0,x.u||'lb',vu)*x.reps,0));const ids=[...new Set(s.sets.map(x=>x.id))];
+ app.innerHTML=`<h2>Workout logged</h2><div class="mut">${new Date(s.date).toLocaleString()}</div><div class="card">${s.sets.length} sets · ${vol.toLocaleString()} ${vu} total volume</div>
  <div class="card"><b>Rate each exercise</b><div class="mut">How did it feel overall? This sets your starting point next time.</div>
- ${ids.map(id=>{const k=s.sets.map(x=>x.id).lastIndexOf(id),x=s.sets[k];return`<div class="rrow"><span>${byId[id].n}<br><small class="mut">${x.w?x.w+' lb · ':''}${x.reps}${x.rated?'':' · not rated'}</small></span>${rateBtns(k,x.rated?x.rate:null)}</div>`}).join('')}</div>
+ ${ids.map(id=>{const k=s.sets.map(x=>x.id).lastIndexOf(id),x=s.sets[k];return`<div class="rrow"><span>${byId[id].n}<br><small class="mut">${x.w?x.w+' '+(x.u||'lb')+' · ':''}${x.reps}${x.rated?'':' · not rated'}</small></span>${rateBtns(k,x.rated?x.rate:null)}</div>`}).join('')}</div>
  <div class="card"><b>Cool-down (5 min)</b><br>Couch stretch, pigeon, doorway pec stretch, child's pose with side reach — 30–45 s each.</div><button class="btn" id="hist">See history</button>`;
  wireRate(app,(k,r)=>{const x=s.sets[k];x.rate=r;x.rated=true;if(S.log[x.id]&&S.log[x.id].last.date===s.date)S.log[x.id].last.rate=r;save()});
  app.querySelector('#hist').onclick=()=>nav('hist')}
 function vHist(){const ss=[...S.sessions].reverse();
  app.innerHTML=`<h2>History</h2>${ss.length?'':'<div class="mut">No workouts yet.</div>'}
- <h3>Exercise progress</h3><div class="card"><table>${Object.entries(S.log).map(([id,h])=>`<tr><td>${byId[id]?.n||id}</td><td style="text-align:right">${h.last.w?h.last.w+' lb × ':''}${h.last.reps} <span class="mut">(${h.last.rate})</span></td></tr>`).join('')||'<tr><td class="mut">—</td></tr>'}</table></div>
+ <h3>Exercise progress</h3><div class="card"><table>${Object.entries(S.log).map(([id,h])=>`<tr><td>${byId[id]?.n||id}</td><td style="text-align:right">${h.last.w?h.last.w+' '+(h.last.u||'lb')+' × ':''}${h.last.reps} <span class="mut">(${h.last.rate})</span></td></tr>`).join('')||'<tr><td class="mut">—</td></tr>'}</table></div>
  <h3>Sessions</h3>${ss.map(s=>{const g={};s.sets.forEach(x=>(g[x.id]=g[x.id]||[]).push(x));
   return`<div class="card"><b>${new Date(s.date).toLocaleDateString(undefined,{weekday:'short',month:'short',day:'numeric',year:'numeric'})}</b>
   ${s.checkin.hurt.length?`<div class="mut">Avoided: ${s.checkin.hurt.join(', ')}</div>`:''}${s.checkin.work.length?`<div class="mut">Focus: ${s.checkin.work.join(', ')}</div>`:''}
@@ -941,6 +962,7 @@ function importData(D,mode){D=migrate(JSON.parse(JSON.stringify(D)));delete D.ap
 // ---------- location editor ----------
 let locEd=null;
 function vLoc(){const L=locEd;if(!L)return nav('set');const has=k=>L.eq.includes(k);
+ const U=k=>(L.u&&L.u[k])||'lb',useg=k=>`<span class="useg" role="group" aria-label="Units">${['lb','kg'].map(v=>`<button data-uk="${k}" data-uv="${v}" class="${U(k)===v?'on':''}" aria-pressed="${U(k)===v}">${v}</button>`).join('')}</span>`;
  const fld=(id,label,val,hint)=>`<label class="fld"><span>${label}</span><input id="${id}" value="${esc(val)}" inputmode="decimal">${hint?`<small class="mut">${hint}</small>`:''}</label>`;
  app.innerHTML=`<div class="xtop"><button class="pill" id="lback">${ICON.left}<span>Settings</span></button></div>
  <h2>${L.isNew?'New location':'Edit location'}</h2>
@@ -948,11 +970,11 @@ function vLoc(){const L=locEd;if(!L)return nav('set');const has=k=>L.eq.includes
  <h3>Equipment here</h3><div class="chips" id="leq">${Object.entries(EQL).map(([k,v])=>`<button class="chip ${has(k)?'work':''}" data-k="${k}" aria-pressed="${has(k)}">${v}</button>`).join('')}</div>
  <div class="mut" style="margin-top:6px">Bodyweight exercises are always available.</div>
  ${has('db')||has('kb')||has('barbell')||has('cable')||has('ball')?'<h3>Weights here</h3>':''}
- ${has('db')?fld('ldb','Dumbbells (lb, per dumbbell, comma separated)',L.db.join(', ')):''}
- ${has('kb')?fld('lkb','Kettlebells (lb, comma separated)',L.kb.join(', ')):''}
- ${has('barbell')?`<div class="row" style="gap:12px">${fld('lbar','Bar (lb)',L.bar)}${fld('lbbmax','Heaviest load (lb)',L.bbMax)}</div><div class="mut">Barbell loads go up 5 lb at a time (a 2.5 lb plate per side).</div>`:''}
- ${has('cable')?`<div class="row" style="gap:12px">${fld('lcmin','Cable lightest',L.cMin)}${fld('lcmax','Heaviest',L.cMax)}${fld('lcstep','Step',L.cStep)}</div>`:''}
- ${has('ball')?fld('lball','Slam ball (lb)',L.ball):''}
+ ${has('db')?`<div class="uhead"><b>Dumbbells</b>${useg('db')}</div>`+fld('ldb',`Per dumbbell, in ${U('db')}, comma separated`,L.db.join(', ')):''}
+ ${has('kb')?`<div class="uhead"><b>Kettlebells</b>${useg('kb')}</div>`+fld('lkb',`In ${U('kb')}, comma separated`,L.kb.join(', ')):''}
+ ${has('barbell')?`<div class="uhead"><b>Barbell + plates</b>${useg('bb')}</div><div class="row" style="gap:12px">${fld('lbar',`Bar (${U('bb')})`,L.bar)}${fld('lbbmax',`Heaviest load (${U('bb')})`,L.bbMax)}</div><div class="mut">${U('bb')==='kg'?'Loads go up 2.5 kg at a time (a 1.25 kg plate per side).':'Loads go up 5 lb at a time (a 2.5 lb plate per side).'}</div>`:''}
+ ${has('cable')?`<div class="uhead"><b>Cable stack</b>${useg('cable')}</div><div class="row" style="gap:12px">${fld('lcmin',`Lightest (${U('cable')})`,L.cMin)}${fld('lcmax','Heaviest',L.cMax)}${fld('lcstep','Step',L.cStep)}</div>`:''}
+ ${has('ball')?`<div class="uhead"><b>Slam ball</b>${useg('ball')}</div>`+fld('lball',`Weight (${U('ball')})`,L.ball):''}
  <button class="btn" id="lsave">Save location</button>
  ${!L.isNew&&S.locs.length>1?'<button class="btn sec" id="ldel" style="color:var(--warn);border-color:var(--warn)">Delete location</button>':''}`;
  const nums=v=>String(v).split(',').map(x=>parseFloat(x)).filter(x=>x>0).sort((a,b)=>a-b);
@@ -962,6 +984,14 @@ function vLoc(){const L=locEd;if(!L)return nav('set');const has=k=>L.eq.includes
   if(g('lcmin')!==null){L.cMin=+g('lcmin')||5;L.cStep=+g('lcstep')||5;L.cMax=Math.max(L.cMin,+g('lcmax')||150)}
   if(g('lball')!==null)L.ball=+g('lball')||15};
  app.querySelector('#lback').onclick=()=>nav('set');
+ app.querySelectorAll('[data-uk]').forEach(b=>b.onclick=()=>{grab();const k=b.dataset.uk,v=b.dataset.uv,o=U(k);if(o===v)return;L.u=Object.assign({},L.u,{[k]:v});
+  const A=UDEF[o],B=UDEF[v],same=(x,y)=>JSON.stringify(x)===JSON.stringify(y);let swapped=true;
+  if(k==='db'){if(same(L.db,A.db))L.db=B.db.slice();else swapped=false}
+  else if(k==='kb'){if(same(L.kb,A.kb))L.kb=B.kb.slice();else swapped=false}
+  else if(k==='bb'){if(L.bar===A.bar&&L.bbMax===A.bbMax){L.bar=B.bar;L.bbMax=B.bbMax}else swapped=false}
+  else if(k==='cable'){if(L.cMin===A.cMin&&L.cMax===A.cMax&&L.cStep===A.cStep){L.cMin=B.cMin;L.cMax=B.cMax;L.cStep=B.cStep}else swapped=false}
+  else if(k==='ball'){L.ball=Math.round(conv(L.ball,o,v)*2)/2}
+  if(!swapped)toast(`Now in ${v} — check the numbers match what's printed on your weights`);const y=window.scrollY;vLoc();window.scrollTo(0,y)});
  app.querySelectorAll('#leq button').forEach(b=>b.onclick=()=>{grab();const k=b.dataset.k;L.eq=has(k)?L.eq.filter(x=>x!==k):[...L.eq,k];const y=window.scrollY;vLoc();window.scrollTo(0,y)});
  app.querySelector('#lsave').onclick=()=>{grab();L.name=L.name.trim();if(!L.name)return toast('Give the location a nickname');
   if(L.eq.includes('db')&&!L.db.length)return toast('List at least one dumbbell weight');if(L.eq.includes('kb')&&!L.kb.length)return toast('List at least one kettlebell weight');
